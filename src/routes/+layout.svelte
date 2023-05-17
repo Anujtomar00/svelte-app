@@ -1,6 +1,7 @@
 <script>
 	import Header from './Header.svelte';
 	import './styles.css';
+	import Chart from './chart.svelte';
 </script>
 
 <div class="app">
@@ -9,6 +10,7 @@
 	<main>
 		<slot />
 	</main>
+	<Chart></Chart>
 
 	<footer>
 		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
