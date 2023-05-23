@@ -1,53 +1,32 @@
-<script>
-	import Header from './Header.svelte';
-	import './styles.css';
+<script lang="ts">
+	import "../app.postcss";
+	import type { LayoutData } from "./$types";
+	import { page } from "$app/stores";
+	import Footer from "./Footer.svelte";
+	import Header from "./Header.svelte";
+	import debug from "debug";
+	import { session } from "$lib/stores/session";
+
+	const log = debug("app:routes:layout.svelte");
+
+	export let data: LayoutData;
+
+	$: title = $page.data?.title ? $page.data.title + " | " : "";
+
+	$: if (data?.user) $session.user = data.user;
+
+	$: log("data:", data);
+	$: log("$page.data:", $page.data);
 </script>
 
-<div class="app">
-	<Header />
+<svelte:head>
+	<title>{title}SvelteKit Auth Demo</title>
+</svelte:head>
 
-	<main>
-		<slot />
-	</main>
+<Header />
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
-</div>
+<main class="max-w-screen-xl mx-auto my-20 px-6">
+	<slot />
+</main>
 
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+<Footer />

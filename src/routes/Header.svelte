@@ -1,147 +1,88 @@
-<script>
-	import { page } from "$app/stores";
+<script lang="ts">
+	import { session } from "$lib/stores/session";
+	import {
+		faBars,
+		faChartLine,
+		faCog,
+		faHeart,
+		faRocket,
+		faSignIn,
+		faSignOut,
+	} from "@fortawesome/free-solid-svg-icons";
+	import Fa from "svelte-fa";
+	import "../app.postcss";
+	import type { PageData } from "./$types";
+console.log($session.user)
+	$: menu_items = $session?.user
+		? [
+				{
+					href: "/dashboard",
+					icon: faChartLine,
+					label: "Dashboard",
+				},
+				{
+					href: "/settings",
+					icon: faCog,
+					label: "Settings",
+				},
+				{
+					href: "/logout",
+					icon: faSignOut,
+					label: "Log Out",
+					reload: true,
+				},
+		  ]
+		: [
+				{
+					href: "/login",
+					icon: faSignIn,
+					label: "Log In",
+				},
+				// {
+				// 	href: "/signup",
+				// 	icon: faHeart,
+				// 	label: "Sign Up",
+				// },
+		  ];
 </script>
 
-<header>
-	<div class="corner">
-		<a href="/" class="icon">
-			<img
-				src="https://images02.vietnamworks.com/companyprofile/Nash-Tech/en/Logo_NashTech.png"
-				alt="Nash Tech"
-			/>
-		</a>
-	</div>
-
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li aria-current={$page.url.pathname === "/" ? "page" : undefined}>
-				<a href="/">Home</a>
-			</li>
-			<li
-				aria-current={$page.url.pathname === "/about"
-					? "page"
-					: undefined}
+<header class="bg-base-200 px-6" style="  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
+	<div class="max-w-screen-xxl mx-auto flex items-center py-2">
+		<h1>
+			<a href="/" >
+				<img src="https://www.nashtechglobal.com/wp-content/uploads/2023/03/nashTech-logo-red.svg" alt="logo" style="max-width: 74%;">
+			</a>
+		</h1>
+		<div style="display: flex;
+		line-height: 44px;
+		margin-left: auto;">
+		{#if $session.user}
+		<p>🎉 Hello there <strong>{$session.user?.email}</strong></p>
+		{/if}
+		<nav class="dropdown dropdown-end ml-auto">
+			<label tabindex="0" class="btn btn-ghost gap-3">
+				<Fa icon={faBars} />
+				Menu
+			</label>
+			
+			<ul
+				tabindex="0"
+				class="dropdown-content menu p-2 shadow-md bg-base-200 rounded-box w-52 "
 			>
-				<a href="/about">About</a>
-			</li>
-			<!-- <li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
-			</li> -->
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
-
-	<div class="corner">
-		<a href="/" class="logout">
-			<img
-				src="https://www.svgrepo.com/show/132889/logout.svg"
-				alt="Logout"
-			/>
-		</a>
+			
+				{#each menu_items as item}
+					<li>
+						<a
+							href={item.href}
+							data-sveltekit-reload={item.reload ? "" : "off"}
+						>
+							<Fa icon={item.icon} />
+							{item.label}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	</div>
 	</div>
 </header>
-
-<style>
-	header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-		margin: 2px;
-	}
-
-	.logout {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-		margin-left: -0.5rem;
-	}
-
-	.corner img {
-		width: 4em;
-		height: 2.5em;
-		object-fit: contain;
-	}
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
-	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li[aria-current="page"]::before {
-		--size: 6px;
-		content: "";
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
-	}
-</style>

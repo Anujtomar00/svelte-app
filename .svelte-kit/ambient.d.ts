@@ -5,7 +5,7 @@
 /// <reference types="@sveltejs/kit" />
 
 /**
- * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
+ * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into public-facing code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
  * 
  * _Unlike_ [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), the values exported from this module are statically injected into your bundle at build time, enabling optimisations like dead code elimination.
  * 
@@ -60,6 +60,7 @@ declare module '$env/static/private' {
 	export const npm_config_metrics_registry: string;
 	export const MANDATORY_PATH: string;
 	export const IM_CONFIG_PHASE: string;
+	export const GTK_IM_MODULE: string;
 	export const LOGNAME: string;
 	export const JOURNAL_STREAM: string;
 	export const _: string;
@@ -101,7 +102,6 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
 	export const QT_ACCESSIBILITY: string;
-	export const NO_AT_BRIDGE: string;
 	export const GDMSESSION: string;
 	export const LESSCLOSE: string;
 	export const CAPACITOR_ANDROID_STUDIO_PATH: string;
@@ -117,10 +117,8 @@ declare module '$env/static/private' {
 	export const XDG_DATA_DIRS: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
-	export const GTK_USE_PORTAL: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
-	export const NODE_ENV: string;
 }
 
 /**
@@ -133,13 +131,13 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+
 }
 
 /**
  * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env).
  * 
- * This module cannot be imported into client-side code.
+ * This module cannot be imported into public-facing code.
  * 
  * ```ts
  * import { env } from '$env/dynamic/private';
@@ -184,6 +182,7 @@ declare module '$env/dynamic/private' {
 		npm_config_metrics_registry: string;
 		MANDATORY_PATH: string;
 		IM_CONFIG_PHASE: string;
+		GTK_IM_MODULE: string;
 		LOGNAME: string;
 		JOURNAL_STREAM: string;
 		_: string;
@@ -225,7 +224,6 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		npm_lifecycle_event: string;
 		QT_ACCESSIBILITY: string;
-		NO_AT_BRIDGE: string;
 		GDMSESSION: string;
 		LESSCLOSE: string;
 		CAPACITOR_ANDROID_STUDIO_PATH: string;
@@ -241,11 +239,8 @@ declare module '$env/dynamic/private' {
 		XDG_DATA_DIRS: string;
 		npm_config_global_prefix: string;
 		npm_command: string;
-		GTK_USE_PORTAL: string;
 		INIT_CWD: string;
 		EDITOR: string;
-		NODE_ENV: string;
-		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
 	}
 }
@@ -262,6 +257,6 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
-		[key: `PUBLIC_${string}`]: string | undefined;
+		[key: string]: string | undefined;
 	}
 }

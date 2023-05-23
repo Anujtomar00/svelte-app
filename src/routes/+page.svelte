@@ -1,51 +1,26 @@
-<script>
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+<script lang="ts">
+	import { session } from "$lib/stores/session";
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-	</h1>
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+<div class="prose" style="margin-left:7rem;">
+	<h1>Intern Management For HRs</h1>
+	<p>This project shows you how to manage the progress of Interns.</p>
+	<p>
+		In this project you can login to the system and can see the scores of
+		interns with the help of charts and their score.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, vero
+		dolor! Deleniti minus, vel quis omnis rem tempore tenetur dignissimos ullam
+		debitis veniam aliquid molestiae labore sit vero! Deleniti, deserunt.
+	</p>
+	<p class="flex items-center gap-4 mt-12">
+		{#if $session?.user}
+			<a href="/dashboard" class="btn btn-primary">Dashboard</a>
+			<a href="/settings" class="btn">Settings</a>
+		{:else}
+			<!-- <a href="/signup" class="btn btn-primary">Sign Up</a> -->
+			<a href="/login" class="btn" style="color:white;">Log In</a>
+		{/if}
+	</p>
+</div>

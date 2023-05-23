@@ -1,19 +1,21 @@
 {
 	"compilerOptions": {
+		"baseUrl": "..",
 		"paths": {
 			"$lib": [
-				"../src/lib"
+				"src/lib"
 			],
 			"$lib/*": [
-				"../src/lib/*"
+				"src/lib/*"
 			]
 		},
 		"rootDirs": [
 			"..",
 			"./types"
 		],
-		"verbatimModuleSyntax": true,
+		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
+		"preserveValueImports": true,
 		"lib": [
 			"esnext",
 			"DOM",
@@ -25,8 +27,10 @@
 	},
 	"include": [
 		"ambient.d.ts",
-		"./types/**/$types.d.ts",
 		"../vite.config.ts",
+		"../src/**/*.js",
+		"../src/**/*.ts",
+		"../src/**/*.svelte",
 		"../src/**/*.js",
 		"../src/**/*.ts",
 		"../src/**/*.svelte",
@@ -36,9 +40,6 @@
 	],
 	"exclude": [
 		"../node_modules/**",
-		"./[!ambient.d.ts]**",
-		"../src/service-worker.js",
-		"../src/service-worker.ts",
-		"../src/service-worker.d.ts"
+		"./[!ambient.d.ts]**"
 	]
 }
