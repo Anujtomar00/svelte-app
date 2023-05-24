@@ -63,10 +63,14 @@
 <div>
 
 <div >
-    <canvas id="myLineChart"  />
+    <canvas id="myLineChart"  
+    style="margin-right: 6rem;"
+    />
 </div>
 <div >
-    <canvas id="myBarChart"  />
+    <canvas id="myBarChart" 
+ 
+    />
 </div>
 </div>
 <!-- <div >
