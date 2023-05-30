@@ -24,7 +24,7 @@
                 ],
                 datasets: [
                     {
-                        label: "My First Dataset",
+                        label: "Interns Hire",
                         data: [0, 10, 5, 2, 20, 30, 45],
                         fill: false,
                         borderColor: "rgb(75, 192, 192)",
@@ -38,18 +38,18 @@
             type: "bar",
             data: {
                 labels: [
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
+                    "Anuj",
+                    "Devansh",
+                    "Paras",
+                    "Rahul",
+                    "Abhishek",
+                    "Shubham",
+                    "Raj",
                 ],
                 datasets: [
                     {
-                        label: "My First Dataset",
-                        data: [0, 10, 5, 2, 20, 30, 45],
+                        label: "Assignment score",
+                        data: [50, 10, 5, 2, 20, 30, 45],
                         fill: false,
                         borderColor: "rgb(75, 192, 192)",
                         tension: 0.1,
@@ -62,14 +62,12 @@
 </script>
 <div>
 
-<div >
+<div style="width:400px">
     <canvas id="myLineChart"  
-    style="margin-right: 6rem;"
     />
 </div>
-<div >
+<div style="width:400px; height:400px">
     <canvas id="myBarChart" 
- 
     />
 </div>
 </div>
@@ -78,12 +76,16 @@
 </div> -->
 
 <style>
+    #myLineChart{
+        width: 100rem;
+    }
     div{
         display: flex;
+        flex-direction: column;
         align-items: center;
     }
     div.div{
-        height: 600px;
-        width: 400px;
+        height: 69%;
+        width: 600px;
     }
 </style>
