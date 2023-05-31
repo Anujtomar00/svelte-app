@@ -3,7 +3,11 @@ const mongoose = require('mongoose')
 const Batch = require('./models/batchModel')
 const Employee =require('./models/employeeModel')
 const app = express()
+const cors = require('cors');
 
+app.use(cors({
+    origin: '*'
+}));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
