@@ -2,6 +2,7 @@
   import { onMount, afterUpdate } from "svelte";
   import AddBatchModal from "./addBatchModal.svelte";
   import EditBatchModal from "./editBatchModal.svelte";
+  import Dialog from '../Dialog/dialog.svelte';
   const addModal = { showModal: false };
   const editModal = { showModal: false };
   let showError = false;
@@ -9,8 +10,12 @@
   let successMessage = "";
   let errorMessage = "";
   let editData: any;
-  let isDataChanged = true;
+  let deleteId:any;
+  let showDialog = false;
 
+  function handleDialogSubmit() {
+    deleteBatch(deleteId);
+  }
   let columns = [
     { id: "batch_name", label: "Batch Name" },
     { id: "batch_status", label: "Batch Status" },
@@ -82,17 +87,20 @@
         // Handle success
         successMessage = "Batch deleted successfully!";
         showSuccess = true;
+        showDialog=false;
         getBatches();
         console.log("Batch deleted successfully!");
       } else {
         // Handle error
         errorMessage = response.statusText;
         showError = true;
+        showDialog=false;
         console.error("Failed to delete batch:", response.statusText);
       }
     } catch (error) {
       errorMessage = String(error);
       showError = true;
+      showDialog=false;
       console.error("Failed to delete batch:", error);
     }
   };
@@ -135,7 +143,8 @@
                     />
                   </div>
                   <div
-                    on:click={() => deleteBatch(row._id)}
+                    on:click={() => {showDialog=true;
+                    deleteId=row._id}}
                     on:keydown={deleteBatch}
                   >
                     <img
@@ -190,6 +199,14 @@
       >
     </div>
   </div>
+{/if}
+{#if showDialog}
+<Dialog isOpen={showDialog} on:close={() => showDialog = false} on:submit={handleDialogSubmit}>
+<div class="prose" >
+  <h1 style="margin-bottom: 0;">Delete</h1>
+  <p>Are you sure you want to delete?</p>
+</div>
+</Dialog>
 {/if}
 
 <style>

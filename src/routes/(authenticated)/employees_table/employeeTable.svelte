@@ -3,6 +3,7 @@
   import AddEmployeeModal from "./addEmployeeModal.svelte";
   import EditEmployeeModal from "./editEmployeeModal.svelte";
   import { derived } from "svelte/store";
+  import Dialog from '../Dialog/dialog.svelte';
   const addModal = { showModal: false };
   const editModal = { showModal: false };
   let refreshTable = false;
@@ -12,6 +13,12 @@
   let errorMessage = "";
   let editData: any;
   let id: any;
+  let deleteId:any;
+  let showDialog = false;
+
+  function handleDialogSubmit() {
+    deleteEmployee(deleteId);
+  }
 
   let columns = [
     { id: "employee_id", label: "ID" },
@@ -85,17 +92,20 @@
         // Handle success
         successMessage = "Employee deleted successfully!";
         showSuccess = true;
+        showDialog=false;
         getEmployee();
         console.log("Batch deleted successfully!");
       } else {
         // Handle error
         errorMessage = response.statusText;
         showError = true;
+        showDialog=false;
         console.error("Failed to delete batch:", response.statusText);
       }
     } catch (error) {
       errorMessage = String(error);
       showError = true;
+      showDialog=false;
       console.error("Failed to delete batch:", error);
     }
   };
@@ -138,7 +148,8 @@
                     />
                   </div>
                   <div
-                    on:click={() => deleteEmployee(row._id)}
+                  on:click={() => {showDialog=true;
+                    deleteId=row._id}}
                     on:keydown={deleteEmployee}
                   >
                     <img
@@ -190,6 +201,15 @@
       >
     </div>
   </div>
+{/if}
+
+{#if showDialog}
+<Dialog isOpen={showDialog} on:close={() => showDialog = false} on:submit={handleDialogSubmit}>
+<div class="prose" >
+  <h1 style="margin-bottom: 0;">Delete</h1>
+  <p>Are you sure you want to delete?</p>
+</div>
+</Dialog>
 {/if}
 
 <style>
