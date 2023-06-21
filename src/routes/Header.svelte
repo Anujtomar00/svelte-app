@@ -12,7 +12,6 @@
 	import Fa from "svelte-fa";
 	import "../app.postcss";
 	import type { PageData } from "./$types";
-console.log($session.user)
 	$: menu_items = $session?.user
 		? [
 				{
