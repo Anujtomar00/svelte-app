@@ -70,7 +70,6 @@
     editModal.showModal = true;
     editData = row;
   };
-  console.log(newData);
   // Subscribe to changes in the derived store
 
   const deleteBatch = async (id: any) => {
@@ -89,7 +88,6 @@
         showSuccess = true;
         showDialog=false;
         getBatches();
-        console.log("Batch deleted successfully!");
       } else {
         // Handle error
         errorMessage = response.statusText;

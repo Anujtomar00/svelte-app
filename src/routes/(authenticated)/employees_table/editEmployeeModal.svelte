@@ -14,6 +14,14 @@
     employee_email: String;
     employee_status: String;
   }
+    /**
+   * @type {any[]}
+   */
+   let newData: any = [];
+  /**
+   * @type {any[]}
+   */
+  let data = [];
   export let renderEmployee:()=>void;
   let form: EditData;
   onMount(() => {
@@ -30,7 +38,6 @@
   //  const formFields = writable(form);
 
   export let showModal = false; // Flag to indicate whether or not to show the modal
-  console.log(editData);
   const handleClose = (event: any) => {
     // Close the modal
     event.preventDefault();
@@ -66,7 +73,6 @@
         successMessage = "Employee edited successfully!";
         showSuccess = true;
         renderEmployee();
-        console.log("Form submitted successfully!");
         showModal = false;
       } else {
         // Handle error
@@ -82,6 +88,20 @@
       console.error("Failed to submit form:", error);
     }
   }
+
+  const getBatches = async () => {
+    const response = await fetch("http://localhost:3000/batches");
+    const json = await response.json();
+    data = json;
+    debugger
+    newData = data.map((item: any) => {
+      const batch_name = item.batch_name;
+      return {
+        batch_name
+      };
+    });
+  };
+  getBatches()
 
   function handleInput(event: any) {
     switch (event.target.id) {
@@ -144,18 +164,18 @@
             value={editData.employee_id}
             on:change={handleInput}
           />
-
-          <input
-            autocorrect="off"
-            type="text"
-            name="batch"
-            id="employee_batch"
-            placeholder="Employee Batch.."
-            class="input input-bordered w-full"
-            required
-            value={editData.employee_batch}
-            on:change={handleInput}
-          />
+          <select
+          id="employee_batch"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          on:input={handleInput}
+          bind:value={editData.employee_batch}
+          style="margin-top: 2rem;"
+        >
+        <option>Select a batch</option>
+        {#each newData as item} 
+        <option value={item.batch_name}>{item.batch_name}</option>
+        {/each}
+        </select>
 
           <input
             autocorrect="off"
@@ -181,17 +201,17 @@
             on:change={handleInput}
           />
 
-          <input
-            autocorrect="off"
-            type="text"
-            id="employee_status"
-            name="status"
-            placeholder="Employee status..."
-            class="input input-bordered w-full"
-            required
-            value={editData.employee_status}
-            on:change={handleInput}
-          />
+          <select
+          id="employee_status"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          on:input={handleInput}
+          bind:value={editData.employee_status}
+          style="margin-top: 2rem;"
+        >
+        <option selected>Select status</option>
+          <option value="Completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+        </select>
 
           <p class="flex items-center gap-4 mt-12">
             <button class="btn btn-primary" type="submit">Submit</button>

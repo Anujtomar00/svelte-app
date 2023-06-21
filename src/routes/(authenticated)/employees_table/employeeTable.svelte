@@ -70,7 +70,6 @@
     editModal.showModal = true;
     editData = row;
   };
-  console.log(newData);
   let derivedRows = derived(newData, ($rows) => $rows);
 
   // Subscribe to changes in the derived store
@@ -94,7 +93,6 @@
         showSuccess = true;
         showDialog=false;
         getEmployee();
-        console.log("Batch deleted successfully!");
       } else {
         // Handle error
         errorMessage = response.statusText;

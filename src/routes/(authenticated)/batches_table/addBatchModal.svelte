@@ -4,10 +4,10 @@
   import { writable } from "svelte/store";
   let showError = false;
   let showSuccess = false;
-  let successMessage ='';
-  let errorMessage='';
+  let successMessage = "";
+  let errorMessage = "";
   const dispatch = createEventDispatcher();
-export let getBatch:any;
+  export let getBatch: any;
   let form = {
     batch_name: "",
     start_date: "",
@@ -38,8 +38,6 @@ export let getBatch:any;
    */
   async function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("Submitting form:", form);
-    // dispatch('submit', form);
     try {
       const response = await fetch("http://localhost:3000/batches", {
         method: "POST",
@@ -51,21 +49,20 @@ export let getBatch:any;
 
       if (response.ok) {
         // Handle success
-        successMessage='Batch submitted successfully!';
-        showSuccess=true;
+        successMessage = "Batch submitted successfully!";
+        showSuccess = true;
         getBatch();
-        console.log("Form submitted successfully!");
         showModal = false;
       } else {
         // Handle error
-        errorMessage=response.statusText;
-        showError=true;
+        errorMessage = response.statusText;
+        showError = true;
         showModal = false;
         console.error("Failed to submit form:", response.statusText);
       }
     } catch (error) {
-      errorMessage=String(error);
-      showError=true;
+      errorMessage = String(error);
+      showError = true;
       showModal = false;
       console.error("Failed to submit form:", error);
     }
@@ -119,10 +116,10 @@ export let getBatch:any;
 
           <input
             autocorrect="off"
-            type="date"
+            type="text"
             id="start_date"
             name="Start Date"
-            placeholder="Start date..."
+            placeholder="Start date (dd/mm/yyyy)"
             class="input input-bordered w-full"
             required
             on:input={handleInput}
@@ -130,25 +127,25 @@ export let getBatch:any;
 
           <input
             autocorrect="off"
-            type="date"
+            type="text"
             id="end_date"
             name="End Date"
-            placeholder="End date..."
+            placeholder="End date (dd/mm/yyyy)"
             class="input input-bordered w-full"
             required
-            on:input={handleInput}
+            on:change={handleInput}
           />
 
-          <input
-            autocorrect="off"
-            type="status"
-            name="Status"
+          <select
             id="status"
-            placeholder="Status.."
-            class="input input-bordered w-full"
-            required
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             on:input={handleInput}
-          />
+            style="margin-top: 2rem;"
+          >
+          <option selected>Select status</option>
+            <option value="Completed">Completed</option>
+            <option value="In Progress">In Progress</option>
+          </select>
 
           <input
             autocorrect="off"
@@ -171,20 +168,24 @@ export let getBatch:any;
   </div>
 </template>
 {#if showError}
-<div class="toast toast-top toast-center">
-  <div class="alert alert-error">
-    <span class="notification-span">{errorMessage}</span>
-    <button class="btn btn-ghost" on:click={() => (showError = false)}>Close</button>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-error">
+      <span class="notification-span">{errorMessage}</span>
+      <button class="btn btn-ghost" on:click={() => (showError = false)}
+        >Close</button
+      >
+    </div>
   </div>
-</div>
 {/if}
 
 {#if showSuccess}
-<div class="toast toast-top toast-center">
-  <div class="alert alert-success">
-    <span class="notification-span">{successMessage}</span>
-    <button class="btn btn-ghost" on:click={() => (showSuccess = false)}>Close</button>
-  </div>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-success">
+      <span class="notification-span">{successMessage}</span>
+      <button class="btn btn-ghost" on:click={() => (showSuccess = false)}
+        >Close</button
+      >
+    </div>
   </div>
 {/if}
 
@@ -248,7 +249,7 @@ export let getBatch:any;
     box-shadow: inset 0 -2px rgba(0, 0, 0, 0.1);
   }
 
-  .notification-span{
+  .notification-span {
     width: 19rem;
     color: black;
   }

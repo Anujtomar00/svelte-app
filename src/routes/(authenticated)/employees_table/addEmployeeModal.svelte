@@ -16,6 +16,14 @@
     employee_email: '',
     employee_status: '',
   };
+   /**
+   * @type {any[]}
+   */
+   let newData: any = [];
+  /**
+   * @type {any[]}
+   */
+  let data = [];
 export let renderEmployee:()=>void;
   const formFields = writable(form);
 
@@ -25,6 +33,7 @@ export let renderEmployee:()=>void;
     showModal = false;
   };
 
+
   /**
    * @param {{ key: string; }} event
    */
@@ -33,13 +42,12 @@ export let renderEmployee:()=>void;
       handleClose();
     }
   }
-
+ 
   /**
    * @param {{ preventDefault: () => void; }} event
    */
   async function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("Submitting form:", form);
     // dispatch('submit', form);
     try {
       const response = await fetch("http://localhost:3000/employees", {
@@ -55,7 +63,6 @@ export let renderEmployee:()=>void;
         successMessage='Employee added successfully!';
         showSuccess=true;
         renderEmployee();
-        console.log("Form submitted successfully!");
         showModal = false;
       } else {
         // Handle error
@@ -72,6 +79,19 @@ export let renderEmployee:()=>void;
     }
   }
 
+  const getBatches = async () => {
+    const response = await fetch("http://localhost:3000/batches");
+    const json = await response.json();
+    data = json;
+    debugger
+    newData = data.map((item: any) => {
+      const batch_name = item.batch_name;
+      return {
+        batch_name
+      };
+    });
+  };
+  getBatches()
   function handleInput(event: any) {
     switch (event.target.id) {
       case "employee_name":
@@ -132,16 +152,17 @@ export let renderEmployee:()=>void;
             on:input={handleInput}
           />
 
-          <input
-            autocorrect="off"
-            type="text"
-            name="batch"
-            id="employee_batch"
-            placeholder="Employee Batch.."
-            class="input input-bordered w-full"
-            required
-            on:input={handleInput}
-          />
+          <select
+          id="employee_batch"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          on:input={handleInput}
+          style="margin-top: 2rem;"
+        >
+        <option selected>Select a batch</option>
+        {#each newData as item} 
+        <option value={item.batch_name}>{item.batch_name}</option>
+        {/each}
+        </select>
 
           <input
             autocorrect="off"
@@ -165,16 +186,17 @@ export let renderEmployee:()=>void;
             on:input={handleInput}
           />
 
-          <input
-            autocorrect="off"
-            type="text"
-            id="employee_status"
-            name="status"
-            placeholder="Employee status..."
-            class="input input-bordered w-full"
-            required
-            on:input={handleInput}
-          />
+          <select
+          id="employee_status"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          on:input={handleInput}
+          style="margin-top: 2rem;"
+        >
+        <option selected>Select status</option>
+        <option value="Completed">Completed</option>
+        <option value="In Progress">In Progress</option>
+
+        </select>
 
           <p class="flex items-center gap-4 mt-12">
             <button class="btn btn-primary" type="submit">Submit</button>
