@@ -7,7 +7,6 @@
   export let editData: any;
   export let id: any;
   export let getBatch:any;
-  console.log("id", id);
   interface EditData {
     batch_name: String;
     start_date: Date;
@@ -29,7 +28,6 @@
   //  const formFields = writable(form);
 
   export let showModal = false; // Flag to indicate whether or not to show the modal
-  console.log(editData);
   const handleClose = (event: any) => {
     // Close the modal
     event.preventDefault();
@@ -49,7 +47,6 @@
    */
   async function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("Submitting form:", form);
     // dispatch('submit', form);
     try {
       const response = await fetch(`http://localhost:3000/batches/${id}`, {
@@ -65,7 +62,6 @@
         successMessage='Batch edited successfully!';
         showSuccess=true;
         getBatch();
-        console.log("Form submitted successfully!");
         showModal = false;
       } else {
         // Handle error
@@ -100,7 +96,6 @@
         form.total_employee = event.target.value;
         break;
     }
-    console.log("Edit", form);
   }
 </script>
 
@@ -154,17 +149,17 @@
             on:change={handleInput}
           />
 
-          <input
-            autocorrect="off"
-            type="status"
-            name="status"
-            id="batch_status"
-            placeholder="Status.."
-            class="input input-bordered w-full"
-            required
-            value={editData.batch_status}
-            on:change={handleInput}
-          />
+          <select
+          id="batch_status"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          style="margin-top: 2rem;"
+          bind:value={editData.batch_status}
+          on:change={handleInput}
+
+        >
+          <option value="Completed">Completed</option>
+          <option value="In Progress">In Progress</option>
+        </select>
 
           <input
             autocorrect="off"
