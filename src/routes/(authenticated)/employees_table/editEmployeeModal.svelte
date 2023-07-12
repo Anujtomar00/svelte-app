@@ -95,7 +95,6 @@
     const response = await fetch("http://localhost:3000/batches");
     const json = await response.json();
     data = json;
-    debugger
     newData = data.map((item: any) => {
       const batch_name = item.batch_name;
       return {
@@ -179,17 +178,6 @@
         {/each}
         </select>
 
-          <input
-            autocorrect="off"
-            type="number"
-            id="employee_number"
-            name="number"
-            placeholder="Employee Number..."
-            class="input input-bordered w-full"
-            required
-            value={editData.employee_number}
-            on:change={handleInput}
-          />
 
           <input
             autocorrect="off"
@@ -213,6 +201,8 @@
         <option selected>Select status</option>
           <option value="Completed">Completed</option>
           <option value="In Progress">In Progress</option>
+          <option value="Left">Left</option>
+          <option value="On Hold">On Hold</option>
         </select>
 
           <p class="flex items-center gap-4 mt-12">

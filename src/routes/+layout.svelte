@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-	<title>{title}SvelteKit Auth Demo</title>
+	<title>{title}L&D Management</title>
 </svelte:head>
 
 <Header />

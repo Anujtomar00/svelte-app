@@ -26,6 +26,7 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const GJS_DEBUG_TOPICS: string;
 	export const LESSOPEN: string;
 	export const LANGUAGE: string;
 	export const USER: string;
@@ -55,7 +56,6 @@ declare module '$env/static/private' {
 	export const MANAGERPID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_local_prefix: string;
-	export const DBUS_STARTER_BUS_TYPE: string;
 	export const SYSTEMD_EXEC_PID: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const COLORTERM: string;
@@ -115,6 +115,7 @@ declare module '$env/static/private' {
 	export const CAPACITOR_ANDROID_STUDIO_PATH: string;
 	export const GTK_IM_MODULE_FILE_VSCODE_SNAP_ORIG: string;
 	export const GPG_AGENT_INFO: string;
+	export const GJS_DEBUG_OUTPUT: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const QT_IM_MODULE: string;
 	export const npm_config_globalconfig: string;
@@ -122,7 +123,6 @@ declare module '$env/static/private' {
 	export const PWD: string;
 	export const npm_execpath: string;
 	export const XDG_CONFIG_DIRS: string;
-	export const DBUS_STARTER_ADDRESS: string;
 	export const XDG_DATA_DIRS: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
@@ -157,6 +157,7 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		GJS_DEBUG_TOPICS: string;
 		LESSOPEN: string;
 		LANGUAGE: string;
 		USER: string;
@@ -186,7 +187,6 @@ declare module '$env/dynamic/private' {
 		MANAGERPID: string;
 		npm_config_userconfig: string;
 		npm_config_local_prefix: string;
-		DBUS_STARTER_BUS_TYPE: string;
 		SYSTEMD_EXEC_PID: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
 		COLORTERM: string;
@@ -246,6 +246,7 @@ declare module '$env/dynamic/private' {
 		CAPACITOR_ANDROID_STUDIO_PATH: string;
 		GTK_IM_MODULE_FILE_VSCODE_SNAP_ORIG: string;
 		GPG_AGENT_INFO: string;
+		GJS_DEBUG_OUTPUT: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		QT_IM_MODULE: string;
 		npm_config_globalconfig: string;
@@ -253,7 +254,6 @@ declare module '$env/dynamic/private' {
 		PWD: string;
 		npm_execpath: string;
 		XDG_CONFIG_DIRS: string;
-		DBUS_STARTER_ADDRESS: string;
 		XDG_DATA_DIRS: string;
 		npm_config_global_prefix: string;
 		npm_command: string;

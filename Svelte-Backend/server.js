@@ -116,7 +116,22 @@ app.put('/employees/:id', async(req, res) => {
     }
 })
 
-// delete a batch
+// delete multiple batch
+app.delete('/batches/delete', async (req, res) => {
+    try {
+      const { ids } = req.body;
+  
+      const deletedBatches = await Batch.deleteMany({ batch_name: { $in: ids } });
+      if (deletedBatches.deletedCount === 0) {
+        return res.status(404).json({ message: "No batches found with the provided IDs" });
+      }
+  
+      res.status(200).json({ message: "Batches deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
 app.delete('/batches/:id', async(req, res) =>{
     try {
         const {id} = req.params;
@@ -131,7 +146,22 @@ app.delete('/batches/:id', async(req, res) =>{
     }
 })
 
-// delete a employee
+// delete multiple employee
+app.delete('/employees/delete', async (req, res) => {
+    try {
+      const { ids } = req.body;
+  
+      const deletedEmployees = await Employee.deleteMany({ _id: { $in: ids } });
+      if (deletedEmployees.deletedCount === 0) {
+        return res.status(404).json({ message: "No Employees found with the provided IDs" });
+      }
+  
+      res.status(200).json({ message: "Employees deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
 app.delete('/employees/:id', async(req, res) =>{
     try {
         const {id} = req.params;

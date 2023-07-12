@@ -10,13 +10,14 @@
   let successMessage = "";
   let errorMessage = "";
   let editData: any;
-  let deleteId:any;
+  let deleteId: any[]=[];
   let showDialog = false;
 
   function handleDialogSubmit() {
     deleteBatch(deleteId);
   }
   let columns = [
+    {id: "checkbox", label:""},
     { id: "batch_name", label: "Batch Name" },
     { id: "batch_status", label: "Batch Status" },
     { id: "total_employee", label: "Total Employees" },
@@ -72,14 +73,15 @@
   };
   // Subscribe to changes in the derived store
 
-  const deleteBatch = async (id: any) => {
+  const deleteBatch = async (ids: any) => {
     // dispatch('submit', form);
     try {
-      const response = await fetch(`http://localhost:3000/batches/${id}`, {
+      const response = await fetch(`http://localhost:3000/batches/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ ids }),
       });
 
       if (response.ok) {
@@ -87,6 +89,7 @@
         successMessage = "Batch deleted successfully!";
         showSuccess = true;
         showDialog=false;
+        showDeleteButton = false; 
         getBatches();
       } else {
         // Handle error
@@ -102,6 +105,44 @@
       console.error("Failed to delete batch:", error);
     }
   };
+
+  let selectedRowIndex: string | number | null = null;
+  let showDeleteButton = false; 
+  let deleteData:any=[];
+  let selectedRows: number[] = [];
+
+function toggleDeleteButton(rowIndex: number) {
+  const isSelected = selectedRows.includes(rowIndex);
+
+  if (isSelected) {
+    selectedRows = selectedRows.filter((index) => index !== rowIndex);
+  } else {
+    selectedRows = [...selectedRows, rowIndex];
+  }
+
+  // Update anyCheckboxSelected variable
+  const anyCheckboxSelected = selectedRows.length > 0;
+
+  if (anyCheckboxSelected) {
+    // Get an array of selected rows
+    const selectedData = selectedRows.map((index) => newData[index]);
+    
+    showDeleteButton = true;
+    deleteData = selectedData;
+  } else {
+    showDeleteButton = false;
+    deleteData = null;
+  }
+
+  // Update the selectedRowIndex
+  selectedRowIndex = anyCheckboxSelected ? rowIndex : null;
+}
+
+const deleteCheckbox =()=>{
+  showDialog=true;
+  deleteId=deleteData.map((item: { batch_name: any; }) => item.batch_name)
+}
+
 </script>
 
 <template>
@@ -115,6 +156,9 @@
       <h2>Batches</h2>
     </div>
     <div>
+      {#if showDeleteButton}
+      <button class="btn btn-danger" style={`margin-right: 1rem;`} on:click={deleteCheckbox} >Delete</button>
+    {/if}
       <button class="btn btn-info" on:click={openAdd}>+ Add Batch</button>
     </div>
   </div>
@@ -127,20 +171,23 @@
       </tr>
     </thead>
     <tbody>
-      {#each newData as row}
+      {#each newData as row,rowIndex}
         <tr>
           {#each columns as column}
             <td>
               {#if column.id === "actions"}
                 <div style="display:flex; justify-content: space-evenly;">
-                  <div on:click={() => openEdit(row)} on:keydown={openEdit}>
+                  <div  class="tooltip" data-tip="Edit" on:click={() => openEdit(row)} on:keydown={openEdit}>
                     <img
-                      src="https://img.icons8.com/?size=1x&id=65358&format=png"
+                      src="https://img.icons8.com/?size=512&id=71201&format=png"
                       alt="edit"
                       style="height: 37px; cursor:pointer;"
                     />
                   </div>
+                  
                 </div>
+                {:else if column.id=== "checkbox"}
+                <input type="checkbox" bind:checked={row.selected} class="checkbox" on:change={() => toggleDeleteButton(rowIndex)}  />
               {:else}
                 {row[column.id]}
               {/if}
