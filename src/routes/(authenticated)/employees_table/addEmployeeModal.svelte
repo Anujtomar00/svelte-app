@@ -166,17 +166,6 @@ export let renderEmployee:()=>void;
 
           <input
             autocorrect="off"
-            type="number"
-            id="employee_number"
-            name="number"
-            placeholder="Employee Score..."
-            class="input input-bordered w-full"
-            required
-            on:input={handleInput}
-          />
-
-          <input
-            autocorrect="off"
             type="email"
             id="employee_email"
             name="email"
@@ -194,6 +183,8 @@ export let renderEmployee:()=>void;
         >
         <option selected>Select status</option>
         <option value="Completed">Completed</option>
+        <option value="Left">Left</option>
+        <option value="On Hold">On Hold</option>
         <option value="In Progress">In Progress</option>
 
         </select>

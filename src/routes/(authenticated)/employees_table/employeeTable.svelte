@@ -4,14 +4,17 @@
   import EditEmployeeModal from "./editEmployeeModal.svelte";
   import { derived } from "svelte/store";
   import Dialog from '../Dialog/dialog.svelte';
+  import DisplayEmployeeModal from "./displayEmployeeModal.svelte";
   const addModal = { showModal: false };
   const editModal = { showModal: false };
+  const viewModal = { showModal: false };
   let refreshTable = false;
   let showError = false;
   let showSuccess = false;
   let successMessage = "";
   let errorMessage = "";
   let editData: any;
+  let viewData: any;
   let id: any;
   let deleteId:any;
   let showDialog = false;
@@ -21,12 +24,12 @@
   }
 
   let columns = [
+    {id: "checkbox", label:""},
     { id: "employee_id", label: "ID" },
     { id: "employee_name", label: "Name" },
     { id: "employee_batch", label: "Batch" },
     { id: "employee_status", label: "Status" },
     { id: "employee_email", label: "Email" },
-    { id: "employee_number", label: "Score" },
     { id: "actions", label: "" },
   ];
   /**
@@ -70,6 +73,11 @@
     editModal.showModal = true;
     editData = row;
   };
+
+  const openView = (/** @type {any} */ row: any) => {
+    viewModal.showModal = true;
+    viewData = row;
+  };
   let derivedRows = derived(newData, ($rows) => $rows);
 
   // Subscribe to changes in the derived store
@@ -77,14 +85,15 @@
     refreshTable = !refreshTable;
   });
 
-  const deleteEmployee = async (id: any) => {
+  const deleteEmployee = async (ids: any) => {
     // dispatch('submit', form);
     try {
-      const response = await fetch(`http://localhost:3000/employees/${id}`, {
+      const response = await fetch(`http://localhost:3000/employees/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ ids }),
       });
 
       if (response.ok) {
@@ -92,6 +101,7 @@
         successMessage = "Employee deleted successfully!";
         showSuccess = true;
         showDialog=false;
+        showDeleteButton = false; 
         getEmployee();
       } else {
         // Handle error
@@ -107,6 +117,43 @@
       console.error("Failed to delete batch:", error);
     }
   };
+
+  let selectedRowIndex: string | number | null = null;
+  let showDeleteButton = false; 
+  let deleteData:any=[];
+  let selectedRows: number[] = [];
+
+function toggleDeleteButton(rowIndex: number) {
+  const isSelected = selectedRows.includes(rowIndex);
+
+  if (isSelected) {
+    selectedRows = selectedRows.filter((index) => index !== rowIndex);
+  } else {
+    selectedRows = [...selectedRows, rowIndex];
+  }
+
+  // Update anyCheckboxSelected variable
+  const anyCheckboxSelected = selectedRows.length > 0;
+
+  if (anyCheckboxSelected) {
+    // Get an array of selected rows
+    const selectedData = selectedRows.map((index) => newData[index]);
+    
+    showDeleteButton = true;
+    deleteData = selectedData;
+  } else {
+    showDeleteButton = false;
+    deleteData = null;
+  }
+
+  // Update the selectedRowIndex
+  selectedRowIndex = anyCheckboxSelected ? rowIndex : null;
+}
+
+const deleteCheckbox =()=>{
+  showDialog=true;
+  deleteId=deleteData.map((item: { _id: any; }) => item._id)
+}
 </script>
 
 <template>
@@ -120,6 +167,9 @@
       <h2>Employees</h2>
     </div>
     <div>
+      {#if showDeleteButton}
+      <button class="btn btn-danger" style={`margin-right: 1rem;`} on:click={deleteCheckbox} >Delete</button>
+    {/if}
       <button class="btn btn-info" on:click={openAdd}>+ Add Employee</button>
     </div>
   </div>
@@ -132,31 +182,29 @@
       </tr>
     </thead>
     <tbody>
-      {#each newData as row}
+      {#each newData as row,rowIndex}
         <tr>
           {#each columns as column}
             <td>
               {#if column.id === "actions"}
                 <div style="display:flex; justify-content: space-evenly;">
-                  <div on:click={() => openEdit(row)} on:keydown={openEdit}>
-                    <img
-                      src="https://img.icons8.com/?size=1x&id=65358&format=png"
+                  <div  class="tooltip" data-tip="View" on:click={() => openView(row)} on:keydown={openView}>
+                    <img 
+                      src="https://img.icons8.com/?size=512&id=11359&format=png"
                       alt="edit"
-                      style="height: 40px;"
+                      style="height: 40px; cursor:pointer;"
                     />
                   </div>
-                  <div
-                  on:click={() => {showDialog=true;
-                    deleteId=row._id}}
-                    on:keydown={deleteEmployee}
-                  >
+                  <div  class="tooltip" data-tip="Edit" on:click={() => openEdit(row)} on:keydown={openEdit}>
                     <img
-                      src="https://img.icons8.com/?size=1x&id=102350&format=png"
-                      alt="delete"
-                      style="height: 40px;"
+                      src="https://img.icons8.com/?size=512&id=71201&format=png"
+                      alt="edit"
+                      style="height: 40px; cursor:pointer;"
                     />
                   </div>
                 </div>
+                {:else if column.id=== "checkbox"}
+                <input type="checkbox" bind:checked={row.selected} class="checkbox" on:change={() => toggleDeleteButton(rowIndex)}  />
               {:else}
                 {row[column.id]}
               {/if}
@@ -176,6 +224,13 @@
     {editData}
     id={editData._id}
     renderEmployee={getEmployee}
+  />
+{/if}
+
+{#if viewModal.showModal}
+  <DisplayEmployeeModal
+    showModal={viewModal.showModal}
+    {viewData}
   />
 {/if}
 

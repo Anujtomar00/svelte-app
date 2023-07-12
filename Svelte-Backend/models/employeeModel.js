@@ -15,6 +15,51 @@ const employeeSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        employee_details: {
+            type: {
+              age: {
+                type: Number,
+                required: true,
+              },
+              dob: {
+                type: String,
+              },
+              gender: {
+                type: String,
+              },
+              personal_email: {
+                type: String,
+                unique: true,
+              },
+              phone_number: {
+                type: Number,
+                unique:true
+              },
+              github_id: {
+                type: String,
+              },
+              address: {
+                type: String,
+              },
+              education: {
+                type: {
+                    degree:{
+                        type: String,
+                    },
+                    completion_year:{
+                        type: String,
+                    },
+                    college_name:{
+                        type: String,
+                    },
+                    percentage:{
+                        type: String,
+                    },
+                }
+              },
+            },
+            required: true,
+          },
         employee_status: {
             type: String,
             required: true
