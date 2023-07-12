@@ -142,7 +142,7 @@
                     <img
                       src="https://img.icons8.com/?size=1x&id=65358&format=png"
                       alt="edit"
-                      style="height: 40px;"
+                      style="height: 37px; cursor:pointer;"
                     />
                   </div>
                   <div
@@ -151,9 +151,9 @@
                     on:keydown={deleteEmployee}
                   >
                     <img
-                      src="https://img.icons8.com/?size=1x&id=102350&format=png"
-                      alt="delete"
-                      style="height: 40px;"
+                      src="https://img.icons8.com/?size=512&id=71201&format=png"
+                      alt="edit"
+                      style="height: 37px; cursor:pointer;"
                     />
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   let showError = false;
   let showSuccess = false;
   let successMessage ='';
@@ -15,7 +15,7 @@
     total_employee: Number;
   }
   let form: EditData;
-  onMount(() => {
+  function updateForm(){
     form = {
       batch_name: editData.batch_name,
       start_date: editData.start_date,
@@ -23,8 +23,10 @@
       batch_status: editData.batch_status,
       total_employee: editData.total_employee,
     };
-  });
+  }
 
+  onMount(updateForm);
+  afterUpdate(updateForm);
   //  const formFields = writable(form);
 
   export let showModal = false; // Flag to indicate whether or not to show the modal

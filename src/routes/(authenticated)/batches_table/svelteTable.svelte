@@ -137,18 +137,7 @@
                     <img
                       src="https://img.icons8.com/?size=1x&id=65358&format=png"
                       alt="edit"
-                      style="height: 40px;"
-                    />
-                  </div>
-                  <div
-                    on:click={() => {showDialog=true;
-                    deleteId=row._id}}
-                    on:keydown={deleteBatch}
-                  >
-                    <img
-                      src="https://img.icons8.com/?size=1x&id=102350&format=png"
-                      alt="delete"
-                      style="height: 40px;"
+                      style="height: 37px; cursor:pointer;"
                     />
                   </div>
                 </div>
