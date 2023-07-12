@@ -13,6 +13,7 @@
     employee_number: Number;
     employee_email: String;
     employee_status: String;
+    practice: String;
   }
     /**
    * @type {any[]}
@@ -32,6 +33,7 @@
       employee_number: editData.employee_number,
       employee_email: editData.employee_email,
       employee_status: editData.employee_status,
+      practice: editData.practice
     };
   });
 
@@ -122,6 +124,9 @@
       case "employee_status":
         form.employee_status = event.target.value;
         break;
+        case "practice":
+        form.practice = event.target.value;
+        break;
     }
   }
 </script>
@@ -202,6 +207,19 @@
           <option value="Left">Left</option>
           <option value="On Hold">On Hold</option>
         </select>
+
+        <select
+        id="practice"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        on:input={handleInput}
+        bind:value={editData.practice}
+        style="margin-top: 2rem;"
+      >
+      <option selected>Select practice</option>
+        <option value="KUP">KUP</option>
+        <option value="KIP">KIP</option>
+        <option value="Permanent">Permanent</option>
+      </select>
 
           <p class="flex items-center gap-4 mt-12">
             <button class="btn btn-primary" type="submit">Submit</button>

@@ -30,6 +30,7 @@
     { id: "employee_batch", label: "Batch" },
     { id: "employee_status", label: "Status" },
     { id: "employee_email", label: "Email" },
+    { id: "practice", label: "Practice" },
     { id: "actions", label: "" },
   ];
   /**
@@ -51,6 +52,7 @@
       const employee_status = item.employee_status;
       const employee_number = item.employee_number;
       const employee_email = item.employee_email;
+      const practice= item.practice;
 
       return {
         ...item,
@@ -60,6 +62,7 @@
         employee_status,
         employee_number,
         employee_email,
+        practice
       };
     });
   }

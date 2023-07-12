@@ -15,6 +15,7 @@
     employee_number: 0,
     employee_email: '',
     employee_status: '',
+    practice:''
   };
    /**
    * @type {any[]}
@@ -83,7 +84,6 @@ export let renderEmployee:()=>void;
     const response = await fetch("http://localhost:3000/batches");
     const json = await response.json();
     data = json;
-    debugger
     newData = data.map((item: any) => {
       const batch_name = item.batch_name;
       return {
@@ -111,6 +111,9 @@ export let renderEmployee:()=>void;
         break;
       case "employee_status":
         form.employee_status = event.target.value;
+        break;
+      case "practice":
+        form.practice = event.target.value;
         break;
     }
   }
@@ -188,6 +191,18 @@ export let renderEmployee:()=>void;
         <option value="In Progress">In Progress</option>
 
         </select>
+
+        <select
+        id="practice"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        on:input={handleInput}
+        style="margin-top: 2rem;"
+      >
+      <option selected>Select practice</option>
+        <option value="KUP">KUP</option>
+        <option value="KIP">KIP</option>
+        <option value="Permanent">Permanent</option>
+      </select>
 
           <p class="flex items-center gap-4 mt-12">
             <button class="btn btn-primary" type="submit">Submit</button>

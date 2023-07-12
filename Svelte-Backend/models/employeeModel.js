@@ -15,6 +15,9 @@ const employeeSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        practice:{
+          type: String,
+        },
         employee_details: {
             type: {
               age: {
@@ -58,7 +61,6 @@ const employeeSchema = mongoose.Schema(
                 }
               },
             },
-            required: true,
           },
         employee_status: {
             type: String,
