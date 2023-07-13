@@ -1,20 +1,67 @@
 <script lang="ts">
-  export let showModal = false; // Flag to indicate whether or not to show the modal
-  
-   export let viewData:any;
-    function handleClose(event:any) {
-      event.preventDefault();
-        showModal = false;
-    }
+  import Timeline from "$lib/components/Timeline.svelte";
+  import TimelineItem from "$lib/components/TimelineItem.svelte";
+  import TimelineSeparator from "$lib/components/TimelineSeparator.svelte";
+  import TimelineDot from "$lib/components/TimelineDot.svelte";
+  import TimelineConnector from "$lib/components/TimelineConnector.svelte";
+  import TimelineContent from "$lib/components/TimelineContent.svelte";
+  import TimelineOppositeContent from "$lib/components/TimelineOppositeContent.svelte";
+  let showSummary = true;
+  let showTimeline = false;
 
-    function handleKeyDown(event: KeyboardEvent) {
+  function handleSummary() {
+    showSummary = true;
+    showTimeline = false;
+  }
+  function handleTimeline() {
+    showSummary = false;
+    showTimeline = true;
+  }
+  const colors = {
+    first: "#7CD5E2",
+    second: "#FEC048",
+    third: "#DD84C1",
+    forth: "#FB6958",
+  };
+  const items = [
+    {
+      year: "Nov 21",
+      title: "Joined Nashtech",
+      color: colors.first,
+    },
+    {
+      year: "Jan 22",
+      title: "Completed KIP",
+      color: colors.second,
+    },
+    {
+      year: "July 22",
+      title: "Completed KUP",
+      color: colors.third,
+    },
+    {
+      year: "July 22",
+      title: "Job Title Changed",
+      color: colors.forth,
+    },
+  ];
+
+  export let showModal = false; // Flag to indicate whether or not to show the modal
+
+  export let viewData: any;
+  function handleClose(event: any) {
+    event.preventDefault();
+    showModal = false;
+  }
+
+  function handleKeyDown(event: KeyboardEvent) {
     if (event.key === "Enter" || event.key === " ") {
       handleClose(event);
     }
   }
-  </script>
-  
-  {#if showModal}
+</script>
+
+{#if showModal}
   <div
     class="modal-container"
     style={showModal ? "display: block;" : "display: none;"}
@@ -26,117 +73,179 @@
     />
     <div class="modal-content">
       <div class="prose" style="display: contents;">
-        <h1 class="text-4xl font-bold text-center mb-4">Employee Details</h1>
-        <div class="grid-container">
-          <div class="bg-aliceblue p-4 shadow-md">
-            <h2 class="section-title">Basic Details</h2>
-
-            <div class="info-item">
-              <p class="label">Name:</p>
-              <p class="value">{viewData.employee_name}</p>
-            </div>
-
-            <div class="info-item">
-              <p class="label">Employee Id:</p>
-              <p class="value">{viewData.employee_id}</p>
-            </div>
-           
-
-            <div class="info-item">
-              <p class="label">Batch:</p>
-              <p class="value">{viewData.employee_batch}</p>
-            </div>
-
-
-            <div class="info-item">
-              <p class="label">Email:</p>
-              <p class="value">{viewData.employee_email}</p>
-            </div>
-
-            <div class="info-item">
-              <p class="label">Status:</p>
-              <p class="value">{viewData.employee_status}</p>
-            </div>
-
-            <div class="info-item">
-              <p class="label">Practice:</p>
-              <p class="value">{viewData.practice}</p>
-            </div>
-          </div>
-
-          <div class="bg-aliceblue p-4 shadow-md">
-        <div class="personal-info">
-          <h2 class="section-title">Personal Information</h2>
-          <div class="info-item">
-            <p class="label">Name:</p>
-            <p class="value">{viewData.employee_name}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Work Email:</p>
-            <p class="value">{viewData.employee_email}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Personal Email:</p>
-            <p class="value">{viewData.employee_details.personal_email}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Age:</p>
-            <p class="value">{viewData.employee_details.age}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Date of Birth:</p>
-            <p class="value">{viewData.employee_details.dob}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Gender:</p>
-            <p class="value">{viewData.employee_details.gender}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Phone Number:</p>
-            <p class="value">{viewData.employee_details.phone_number}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">GitHub ID:</p>
-            <p class="value">{viewData.employee_details.github_id}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Address:</p>
-            <p class="value">{viewData.employee_details.address}</p>
-          </div>
+        <h1 class="text-4xl font-bold text-center mb-10">Employee Details</h1>
+        <div class="tab">
+          <button class:selected={showSummary} on:click={handleSummary}>Details</button>
+          <button class:selected={showTimeline} on:click={handleTimeline}>Timeline</button>
         </div>
-        </div>
-  
-        <div class="bg-aliceblue p-4 shadow-md">
+       
+        {#if showSummary}
+          <div class="grid-container">
+            <div class="bg-aliceblue p-4 shadow-md">
+              <h2 class="section-title">Basic Details</h2>
 
-        <div class="education-info">
-          <h2 class="section-title">Education Qualification</h2>
-          <div class="info-item">
-            <p class="label">Degree:</p>
-            <p class="value">{viewData.employee_details.education.degree}</p>
+              <div class="info-item">
+                <p class="label">Name:</p>
+                <p class="value">{viewData.employee_name}</p>
+              </div>
+
+              <div class="info-item">
+                <p class="label">Employee Id:</p>
+                <p class="value">{viewData.employee_id}</p>
+              </div>
+
+              <div class="info-item">
+                <p class="label">Batch:</p>
+                <p class="value">{viewData.employee_batch}</p>
+              </div>
+
+              <div class="info-item">
+                <p class="label">Email:</p>
+                <p class="value">{viewData.employee_email}</p>
+              </div>
+
+              <div class="info-item">
+                <p class="label">Status:</p>
+                <p class="value">{viewData.employee_status}</p>
+              </div>
+
+              <div class="info-item">
+                <p class="label">Practice:</p>
+                <p class="value">{viewData.practice}</p>
+              </div>
+            </div>
+
+            <div class="bg-aliceblue p-4 shadow-md">
+              <div class="personal-info">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="info-item">
+                  <p class="label">Name:</p>
+                  <p class="value">{viewData.employee_name}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Work Email:</p>
+                  <p class="value">{viewData.employee_email}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Personal Email:</p>
+                  <p class="value">
+                    {viewData.employee_details.personal_email}
+                  </p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Age:</p>
+                  <p class="value">{viewData.employee_details.age}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Date of Birth:</p>
+                  <p class="value">{viewData.employee_details.dob}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Gender:</p>
+                  <p class="value">{viewData.employee_details.gender}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Phone Number:</p>
+                  <p class="value">{viewData.employee_details.phone_number}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">GitHub ID:</p>
+                  <p class="value">{viewData.employee_details.github_id}</p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Address:</p>
+                  <p class="value">{viewData.employee_details.address}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-aliceblue p-4 shadow-md">
+              <div class="education-info">
+                <h2 class="section-title">Education Qualification</h2>
+                <div class="info-item">
+                  <p class="label">Degree:</p>
+                  <p class="value">
+                    {viewData.employee_details.education.degree}
+                  </p>
+                </div>
+                <div class="info-item">
+                  <p class="label">College Name:</p>
+                  <p class="value">
+                    {viewData.employee_details.education.college_name}
+                  </p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Date of Completion:</p>
+                  <p class="value">
+                    {viewData.employee_details.education.completion_year}
+                  </p>
+                </div>
+                <div class="info-item">
+                  <p class="label">Percentage:</p>
+                  <p class="value">
+                    {viewData.employee_details.education.percentage}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="label">College Name:</p>
-            <p class="value">{viewData.employee_details.education.college_name}</p>
+        {/if}
+
+        {#if showTimeline}
+          <div class="personal-info">
+            <h2 class="section-title">Timeline</h2>
+            <Timeline
+              position="alternate"
+              style={`border-radius: 3%; padding: 1rem;`}
+            >
+              {#each items as item}
+                <TimelineItem>
+                  <TimelineOppositeContent slot="opposite-content">
+                    <p class="oposite-content-title">{item.year}</p>
+                  </TimelineOppositeContent>
+                  <TimelineSeparator>
+                    <TimelineDot
+                      style={`background-color: ${item.color}; border-color: #fff;`}
+                    />
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <h3 class="content-title">{item.title}</h3>
+                    <!-- <p class="content-description">{item.description}</p> -->
+                  </TimelineContent>
+                </TimelineItem>
+              {/each}
+            </Timeline>
           </div>
-          <div class="info-item">
-            <p class="label">Date of Completion:</p>
-            <p class="value">{viewData.employee_details.education.completion_year}</p>
-          </div>
-          <div class="info-item">
-            <p class="label">Percentage:</p>
-            <p class="value">{viewData.employee_details.education.percentage}</p>
-          </div>
-        </div>
-        </div>
-        </div>
+        {/if}
         <button class="dialog-close-button" on:click={handleClose}>Close</button>
       </div>
     </div>
   </div>
-  {/if}
-  
-  <style>
+{/if}
 
+<style>
+   .tab {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 5rem;
+  }
+
+  button.selected {
+    background-color: #2196f3;
+    color: #fff;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #f5f5f5;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 .modal-container {
     position: fixed;
     z-index: 1000;
@@ -181,6 +290,7 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 3rem;
+    margin-top: 3rem;
   }
   
   .bg-aliceblue {
@@ -238,5 +348,13 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-  </style>
-  
+
+    .oposite-content-title {
+    margin: 0;
+    padding: 0;
+  }
+  .content-title {
+    margin: 0;
+    padding: 0;
+  }
+</style>
