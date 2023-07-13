@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   export let editData: any;
   export let id: any;
   let showError = false;
@@ -40,7 +40,7 @@
   let data = [];
   export let renderEmployee: () => void;
   let form: EditData;
-  onMount(() => {
+  function updateForm() {
     form = {
       employee_name: editData.employee_name,
       employee_id: editData.employee_id,
@@ -65,8 +65,10 @@
         },
       },
     };
-  });
-
+  }
+  
+  onMount(updateForm)
+  afterUpdate(updateForm)
   //  const formFields = writable(form);
 
   export let showModal = false; // Flag to indicate whether or not to show the modal
