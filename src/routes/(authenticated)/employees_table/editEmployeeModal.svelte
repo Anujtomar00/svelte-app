@@ -14,16 +14,31 @@
     employee_email: String;
     employee_status: String;
     practice: String;
+    employee_details: {
+      age: Number;
+      dob: String;
+      gender: String;
+      personal_email: String;
+      phone_number: Number;
+      github_id: String;
+      address: "";
+      education: {
+        degree: String;
+        completion_year: String;
+        college_name: String;
+        percentage: String;
+      };
+    };
   }
-    /**
+  /**
    * @type {any[]}
    */
-   let newData: any = [];
+  let newData: any = [];
   /**
    * @type {any[]}
    */
   let data = [];
-  export let renderEmployee:()=>void;
+  export let renderEmployee: () => void;
   let form: EditData;
   onMount(() => {
     form = {
@@ -33,7 +48,22 @@
       employee_number: editData.employee_number,
       employee_email: editData.employee_email,
       employee_status: editData.employee_status,
-      practice: editData.practice
+      practice: editData.practice,
+      employee_details: {
+        age: editData.employee_details.age,
+        dob: editData.employee_details.dob,
+        gender: editData.employee_details.gender,
+        personal_email: editData.employee_details.personal_email,
+        phone_number: editData.employee_details.phone_number,
+        github_id: editData.employee_details.github_id,
+        address: editData.employee_details.address,
+        education: {
+          degree: editData.employee_details.education.degree,
+          completion_year: editData.employee_details.education.completion_year,
+          college_name: editData.employee_details.education.college_name,
+          percentage: editData.employee_details.education.percentage,
+        },
+      },
     };
   });
 
@@ -98,11 +128,11 @@
     newData = data.map((item: any) => {
       const batch_name = item.batch_name;
       return {
-        batch_name
+        batch_name,
       };
     });
   };
-  getBatches()
+  getBatches();
 
   function handleInput(event: any) {
     switch (event.target.id) {
@@ -124,8 +154,42 @@
       case "employee_status":
         form.employee_status = event.target.value;
         break;
-        case "practice":
+      case "practice":
         form.practice = event.target.value;
+        break;
+      case "age":
+        form.employee_details.age = event.target.value;
+        break;
+      case "dob":
+        form.employee_details.dob = event.target.value;
+        break;
+      case "gender":
+        form.employee_details.gender = event.target.value;
+        break;
+      case "personal_email":
+        form.employee_details.personal_email = event.target.value;
+        break;
+      case "phone_number":
+        form.employee_details.phone_number = event.target.value;
+        break;
+      case "github_id":
+        form.employee_details.github_id = event.target.value;
+        break;
+      case "address":
+        form.employee_details.address = event.target.value;
+        break;
+
+      case "degree":
+        form.employee_details.education.degree = event.target.value;
+        break;
+      case "completion_year":
+        form.employee_details.education.completion_year = event.target.value;
+        break;
+      case "college_name":
+        form.employee_details.education.college_name = event.target.value;
+        break;
+      case "percentage":
+        form.employee_details.education.percentage = event.target.value;
         break;
     }
   }
@@ -142,91 +206,239 @@
       on:keydown={handleKeyDown}
     />
     <div class="modal-content">
-      <div class="prose">
-        <h2 class="">Edit Employee</h2>
+      <div class="prose" style="display: contents;">
+        <h1 class="text-4xl font-bold text-center mb-4">Edit Employee</h1>
         <form on:submit={handleSubmit}>
-          <input
-            autocorrect="off"
-            type="text"
-            id="employee_name"
-            name="name"
-            placeholder="Employee name..."
-            class="input input-bordered w-full"
-            required
-            bind:value={editData.employee_name}
-            on:change={handleInput}
-          />
+          <div class="grid-container">
+            <div class="bg-aliceblue p-4 shadow-md">
+              <h2 class="">Basic Details</h2>
+              <input
+                autocorrect="off"
+                type="text"
+                id="employee_name"
+                name="name"
+                placeholder="Employee name..."
+                class="input input-bordered w-full"
+                required
+                bind:value={editData.employee_name}
+                on:change={handleInput}
+              />
 
-          <input
-            autocorrect="off"
-            type="Number"
-            id="employee_id"
-            name="id"
-            placeholder="Employee Id..."
-            class="input input-bordered w-full"
-            required
-            value={editData.employee_id}
-            on:change={handleInput}
-          />
-          <select
-          id="employee_batch"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          on:input={handleInput}
-          bind:value={editData.employee_batch}
-          style="margin-top: 2rem;"
-        >
-        <option>Select a batch</option>
-        {#each newData as item} 
-        <option value={item.batch_name}>{item.batch_name}</option>
-        {/each}
-        </select>
+              <input
+                autocorrect="off"
+                type="Number"
+                id="employee_id"
+                name="id"
+                placeholder="Employee Id..."
+                class="input input-bordered w-full"
+                required
+                value={editData.employee_id}
+                on:change={handleInput}
+              />
+              <select
+                id="employee_batch"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                on:input={handleInput}
+                bind:value={editData.employee_batch}
+                style="margin-top: 2rem;"
+              >
+                <option>Select a batch</option>
+                {#each newData as item}
+                  <option value={item.batch_name}>{item.batch_name}</option>
+                {/each}
+              </select>
 
+              <input
+                autocorrect="off"
+                type="email"
+                id="employee_email"
+                name="email"
+                placeholder="Employee email..."
+                class="input input-bordered w-full"
+                required
+                value={editData.employee_email}
+                on:change={handleInput}
+              />
 
-          <input
-            autocorrect="off"
-            type="email"
-            id="employee_email"
-            name="email"
-            placeholder="Employee email..."
-            class="input input-bordered w-full"
-            required
-            value={editData.employee_email}
-            on:change={handleInput}
-          />
+              <select
+                id="employee_status"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                on:input={handleInput}
+                bind:value={editData.employee_status}
+                style="margin-top: 2rem;"
+              >
+                <option selected>Select status</option>
+                <option value="Completed">Completed</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Left">Left</option>
+                <option value="On Hold">On Hold</option>
+              </select>
 
-          <select
-          id="employee_status"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          on:input={handleInput}
-          bind:value={editData.employee_status}
-          style="margin-top: 2rem;"
-        >
-        <option selected>Select status</option>
-          <option value="Completed">Completed</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Left">Left</option>
-          <option value="On Hold">On Hold</option>
-        </select>
+              <select
+                id="practice"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                on:input={handleInput}
+                bind:value={editData.practice}
+                style="margin-top: 2rem;"
+              >
+                <option selected>Select practice</option>
+                <option value="KUP">KUP</option>
+                <option value="KIP">KIP</option>
+                <option value="Permanent">Permanent</option>
+              </select>
+            </div>
 
-        <select
-        id="practice"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        on:input={handleInput}
-        bind:value={editData.practice}
-        style="margin-top: 2rem;"
-      >
-      <option selected>Select practice</option>
-        <option value="KUP">KUP</option>
-        <option value="KIP">KIP</option>
-        <option value="Permanent">Permanent</option>
-      </select>
+            <div class="p-4 bg-aliceblue shadow-md">
+              <div class="personal-info">
+                <h2 class="section-title">Personal Information</h2>
 
-          <p class="flex items-center gap-4 mt-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn" on:click={handleClose} type="button"
-              >Cancel</button
-            >
-          </p>
+                <input
+                  autocorrect="off"
+                  type="email"
+                  id="personal_email"
+                  name="email"
+                  placeholder="Personal Email..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.personal_email}
+                  on:input={handleInput}
+                />
+
+                <input
+                  autocorrect="off"
+                  type="number"
+                  id="age"
+                  name="number"
+                  placeholder="Age..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.age}
+                  on:input={handleInput}
+                />
+
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="dob"
+                  name="text"
+                  placeholder="Date of Birth..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.dob}
+                  on:input={handleInput}
+                />
+
+                <select
+                  id="gender"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  on:input={handleInput}
+                  style="margin-top: 2rem;"
+                >
+                  <option selected>Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+
+                <input
+                  autocorrect="off"
+                  type="number"
+                  id="phone_number"
+                  name="number"
+                  placeholder="Phone Number..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.phone_number}
+                  on:input={handleInput}
+                />
+
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="github_id"
+                  name="text"
+                  placeholder="GitHub ID..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.github_id}
+                  on:input={handleInput}
+                />
+
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="address"
+                  name="text"
+                  placeholder="Address..."
+                  class="input input-bordered w-full"
+                  required
+                  bind:value={editData.employee_details.address}
+                  on:input={handleInput}
+                />
+              </div>
+            </div>
+
+              <div class="p-4 bg-aliceblue shadow-md">
+                <div class="education-info">
+                  <h2 class="section-title">Education Qualification</h2>
+                  <input
+                    autocorrect="off"
+                    type="text"
+                    id="degree"
+                    name="text"
+                    placeholder="Degree..."
+                    class="input input-bordered w-full"
+                    required
+                    bind:value={editData.employee_details.education.degree}
+                    on:input={handleInput}
+                  />
+
+                  <input
+                    autocorrect="off"
+                    type="text"
+                    id="college_name"
+                    name="text"
+                    placeholder="College Name..."
+                    class="input input-bordered w-full"
+                    required
+                    bind:value={editData.employee_details.education
+                      .college_name}
+                    on:input={handleInput}
+                  />
+
+                  <input
+                    autocorrect="off"
+                    type="text"
+                    id="completion_year"
+                    name="text"
+                    placeholder="Date of Completion..."
+                    class="input input-bordered w-full"
+                    required
+                    bind:value={editData.employee_details.education
+                      .completion_year}
+                    on:input={handleInput}
+                  />
+
+                  <input
+                    autocorrect="off"
+                    type="text"
+                    id="percentage"
+                    name="percentage"
+                    placeholder="Percentage..."
+                    class="input input-bordered w-full"
+                    required
+                    bind:value={editData.employee_details.education.percentage}
+                    on:input={handleInput}
+                  />
+                </div>
+              </div>
+
+              <p class="flex items-center gap-4 mt-12">
+                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn" on:click={handleClose} type="button"
+                  >Cancel</button
+                >
+              </p>
+          </div>
         </form>
       </div>
     </div>
@@ -267,6 +479,11 @@
     align-items: center;
   }
 
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+  }
   .modal-background {
     position: absolute;
     top: 0;
@@ -276,11 +493,15 @@
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 900;
   }
+  .bg-aliceblue {
+    background-color: aliceblue;
+    border-radius: 10px;
+  }
 
   .modal-content {
+    overflow: auto;
     position: relative;
     z-index: 1000;
-    max-width: 600px;
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
@@ -289,6 +510,8 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    height: 95%;
+    width: 50%;
   }
 
   form {
@@ -314,7 +537,7 @@
     box-shadow: inset 0 -2px rgba(0, 0, 0, 0.1);
   }
 
-  .notification-span{
+  .notification-span {
     width: 19rem;
     color: black;
   }

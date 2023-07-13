@@ -6,26 +6,41 @@
   const dispatch = createEventDispatcher();
   let showError = false;
   let showSuccess = false;
-  let successMessage ='';
-  let errorMessage='';
+  let successMessage = "";
+  let errorMessage = "";
   let form = {
-    employee_name: '',
+    employee_name: "",
     employee_id: 0,
-    employee_batch: '',
+    employee_batch: "",
     employee_number: 0,
-    employee_email: '',
-    employee_status: '',
-    practice:''
+    employee_email: "",
+    employee_status: "",
+    practice: "",
+    employee_details: {
+      age: 0,
+      dob: "",
+      gender: "",
+      personal_email: "",
+      phone_number: 0,
+      github_id: "",
+      address: "",
+      education: {
+        degree: "",
+        completion_year: "",
+        college_name: "",
+        percentage: "",
+      },
+    },
   };
-   /**
+  /**
    * @type {any[]}
    */
-   let newData: any = [];
+  let newData: any = [];
   /**
    * @type {any[]}
    */
   let data = [];
-export let renderEmployee:()=>void;
+  export let renderEmployee: () => void;
   const formFields = writable(form);
 
   export let showModal = false; // Flag to indicate whether or not to show the modal
@@ -33,7 +48,6 @@ export let renderEmployee:()=>void;
     // Close the modal
     showModal = false;
   };
-
 
   /**
    * @param {{ key: string; }} event
@@ -43,7 +57,7 @@ export let renderEmployee:()=>void;
       handleClose();
     }
   }
- 
+
   /**
    * @param {{ preventDefault: () => void; }} event
    */
@@ -61,20 +75,20 @@ export let renderEmployee:()=>void;
 
       if (response.ok) {
         // Handle success
-        successMessage='Employee added successfully!';
-        showSuccess=true;
+        successMessage = "Employee added successfully!";
+        showSuccess = true;
         renderEmployee();
         showModal = false;
       } else {
         // Handle error
-        errorMessage=response.statusText;
-        showError=true;
+        errorMessage = response.statusText;
+        showError = true;
         showModal = false;
         console.error("Failed to submit form:", response.statusText);
       }
     } catch (error) {
-      errorMessage=String(error);
-      showError=true;
+      errorMessage = String(error);
+      showError = true;
       showModal = false;
       console.error("Failed to submit form:", error);
     }
@@ -87,11 +101,11 @@ export let renderEmployee:()=>void;
     newData = data.map((item: any) => {
       const batch_name = item.batch_name;
       return {
-        batch_name
+        batch_name,
       };
     });
   };
-  getBatches()
+  getBatches();
   function handleInput(event: any) {
     switch (event.target.id) {
       case "employee_name":
@@ -115,6 +129,41 @@ export let renderEmployee:()=>void;
       case "practice":
         form.practice = event.target.value;
         break;
+
+      case "age":
+        form.employee_details.age = event.target.value;
+        break;
+      case "dob":
+        form.employee_details.dob = event.target.value;
+        break;
+      case "gender":
+        form.employee_details.gender = event.target.value;
+        break;
+      case "personal_email":
+        form.employee_details.personal_email = event.target.value;
+        break;
+      case "phone_number":
+        form.employee_details.phone_number = event.target.value;
+        break;
+      case "github_id":
+        form.employee_details.github_id = event.target.value;
+        break;
+      case "address":
+        form.employee_details.address = event.target.value;
+        break;
+
+      case "degree":
+        form.employee_details.education.degree = event.target.value;
+        break;
+      case "completion_year":
+        form.employee_details.education.completion_year = event.target.value;
+        break;
+      case "college_name":
+        form.employee_details.education.college_name = event.target.value;
+        break;
+      case "percentage":
+        form.employee_details.education.percentage = event.target.value;
+        break;
     }
   }
 </script>
@@ -129,10 +178,17 @@ export let renderEmployee:()=>void;
       on:click={handleClose}
       on:keydown={handleKeyDown}
     />
+   
+    
     <div class="modal-content">
-      <div class="prose">
-        <h2 class="">Add Employee</h2>
+      <div class="prose" style="display: contents;">
+        <h1 class="text-4xl font-bold text-center mb-4">Add Employee</h1>
         <form on:submit={handleSubmit}>
+        <div class="grid-container">
+          <div class="bg-aliceblue p-4 shadow-md">
+
+        <h2 class="">Basic Details</h2>
+
           <input
             autocorrect="off"
             type="text"
@@ -156,16 +212,16 @@ export let renderEmployee:()=>void;
           />
 
           <select
-          id="employee_batch"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          on:input={handleInput}
-          style="margin-top: 2rem;"
-        >
-        <option selected>Select a batch</option>
-        {#each newData as item} 
-        <option value={item.batch_name}>{item.batch_name}</option>
-        {/each}
-        </select>
+            id="employee_batch"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            on:input={handleInput}
+            style="margin-top: 2rem;"
+          >
+            <option selected>Select a batch</option>
+            {#each newData as item}
+              <option value={item.batch_name}>{item.batch_name}</option>
+            {/each}
+          </select>
 
           <input
             autocorrect="off"
@@ -179,59 +235,192 @@ export let renderEmployee:()=>void;
           />
 
           <select
-          id="employee_status"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          on:input={handleInput}
-          style="margin-top: 2rem;"
-        >
-        <option selected>Select status</option>
-        <option value="Completed">Completed</option>
-        <option value="Left">Left</option>
-        <option value="On Hold">On Hold</option>
-        <option value="In Progress">In Progress</option>
+            id="employee_status"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            on:input={handleInput}
+            style="margin-top: 2rem;"
+          >
+            <option selected>Select status</option>
+            <option value="Completed">Completed</option>
+            <option value="Left">Left</option>
+            <option value="On Hold">On Hold</option>
+            <option value="In Progress">In Progress</option>
+          </select>
 
-        </select>
+          <select
+            id="practice"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            on:input={handleInput}
+            style="margin-top: 2rem;"
+          >
+            <option selected>Select practice</option>
+            <option value="KUP">KUP</option>
+            <option value="KIP">KIP</option>
+            <option value="Permanent">Permanent</option>
+          </select>
+        </div>
+          <div class="p-4 bg-aliceblue shadow-md">
 
-        <select
-        id="practice"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        on:input={handleInput}
-        style="margin-top: 2rem;"
-      >
-      <option selected>Select practice</option>
-        <option value="KUP">KUP</option>
-        <option value="KIP">KIP</option>
-        <option value="Permanent">Permanent</option>
-      </select>
+          <div class="personal-info">
+            <h2 class="section-title">Personal Information</h2>
 
+              <input 
+              autocorrect="off"
+              type="email"
+              id="personal_email"
+              name="email"
+              placeholder="Personal Email..."
+              class="input input-bordered w-full"
+              required
+              on:input={handleInput}/>
+
+              <input 
+              autocorrect="off"
+              type="number"
+              id="age"
+              name="number"
+              placeholder="Age..."
+              class="input input-bordered w-full"
+              required
+              on:input={handleInput}/>
+
+            <input 
+            autocorrect="off"
+            type="text"
+            id="dob"
+            name="text"
+            placeholder="Date of Birth..."
+            class="input input-bordered w-full"
+            required
+            on:input={handleInput}/>
+
+            <select
+            id="gender"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            on:input={handleInput}
+            style="margin-top: 2rem;"
+          >
+            <option selected>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+            <input 
+            autocorrect="off"
+            type="number"
+            id="phone_number"
+            name="number"
+            placeholder="Phone Number..."
+            class="input input-bordered w-full"
+            required
+            on:input={handleInput}/>
+
+            <input 
+            autocorrect="off"
+            type="text"
+            id="github_id"
+            name="text"
+            placeholder="GitHub ID..."
+            class="input input-bordered w-full"
+            required
+            on:input={handleInput}/>
+
+            <input 
+            autocorrect="off"
+            type="text"
+            id="address"
+            name="text"
+            placeholder="Address..."
+            class="input input-bordered w-full"
+            required
+            on:input={handleInput}/>
+          </div>
+        </div>
+
+          <div class="p-4 bg-aliceblue shadow-md">
+
+        <div class="education-info">
+          <h2 class="section-title">Education Qualification</h2>
+          <input 
+          autocorrect="off"
+          type="text"
+          id="degree"
+          name="text"
+          placeholder="Degree..."
+          class="input input-bordered w-full"
+          required
+          on:input={handleInput}/>
+
+          <input 
+          autocorrect="off"
+          type="text"
+          id="college_name"
+          name="text"
+          placeholder="College Name..."
+          class="input input-bordered w-full"
+          required
+          on:input={handleInput}/>
+
+          <input 
+          autocorrect="off"
+          type="text"
+          id="completion_year"
+          name="text"
+          placeholder="Date of Completion..."
+          class="input input-bordered w-full"
+          required
+          on:input={handleInput}/>
+
+          <input 
+          autocorrect="off"
+          type="text"
+          id="percentage"
+          name="percentage"
+          placeholder="Percentage..."
+          class="input input-bordered w-full"
+          required
+          on:input={handleInput}/>
+        </div>
+      </div>
           <p class="flex items-center gap-4 mt-12">
             <button class="btn btn-primary" type="submit">Submit</button>
             <button class="btn" on:click={handleClose}>Cancel</button>
           </p>
-        </form>
+        </div>
+      </form>
       </div>
     </div>
   </div>
 </template>
 {#if showError}
-<div class="toast toast-top toast-center">
-  <div class="alert alert-error">
-    <span class="notification-span">{errorMessage}</span>
-    <button class="btn btn-ghost" on:click={() => (showError = false)}>Close</button>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-error">
+      <span class="notification-span">{errorMessage}</span>
+      <button class="btn btn-ghost" on:click={() => (showError = false)}
+        >Close</button
+      >
+    </div>
   </div>
-</div>
 {/if}
 
 {#if showSuccess}
-<div class="toast toast-top toast-center">
-  <div class="alert alert-success">
-    <span class="notification-span">{successMessage}</span>
-    <button class="btn btn-ghost" on:click={() => (showSuccess = false)}>Close</button>
-  </div>
+  <div class="toast toast-top toast-center">
+    <div class="alert alert-success">
+      <span class="notification-span">{successMessage}</span>
+      <button class="btn btn-ghost" on:click={() => (showSuccess = false)}
+        >Close</button
+      >
+    </div>
   </div>
 {/if}
 
 <style>
+   .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+  }
+  
   .modal-container {
     position: fixed;
     z-index: 1000;
@@ -255,9 +444,9 @@ export let renderEmployee:()=>void;
   }
 
   .modal-content {
+    overflow: auto;
     position: relative;
     z-index: 1000;
-    max-width: 600px;
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
@@ -266,6 +455,8 @@ export let renderEmployee:()=>void;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    height: 95%;
+    width: 50%;
   }
 
   form {
@@ -291,7 +482,12 @@ export let renderEmployee:()=>void;
     box-shadow: inset 0 -2px rgba(0, 0, 0, 0.1);
   }
 
-  .notification-span{
+  .bg-aliceblue {
+    background-color: aliceblue;
+    border-radius: 10px;
+  }
+
+  .notification-span {
     width: 19rem;
     color: black;
   }
