@@ -31,7 +31,6 @@ declare module '$env/static/private' {
 	export const USER: string;
 	export const npm_config_user_agent: string;
 	export const GIO_MODULE_DIR: string;
-	export const SSH_AGENT_PID: string;
 	export const XDG_SESSION_TYPE: string;
 	export const GIT_ASKPASS: string;
 	export const GTK_EXE_PREFIX_VSCODE_SNAP_ORIG: string;
@@ -57,6 +56,7 @@ declare module '$env/static/private' {
 	export const npm_config_userconfig: string;
 	export const npm_config_local_prefix: string;
 	export const DBUS_STARTER_BUS_TYPE: string;
+	export const SYSTEMD_EXEC_PID: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const COLORTERM: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
@@ -64,6 +64,7 @@ declare module '$env/static/private' {
 	export const npm_config_metrics_registry: string;
 	export const MANDATORY_PATH: string;
 	export const IM_CONFIG_PHASE: string;
+	export const GTK_IM_MODULE: string;
 	export const LOGNAME: string;
 	export const JOURNAL_STREAM: string;
 	export const _: string;
@@ -90,7 +91,6 @@ declare module '$env/static/private' {
 	export const GDK_BACKEND: string;
 	export const DISPLAY: string;
 	export const LOCPATH: string;
-	export const npm_config_legacy_peer_deps: string;
 	export const LANG: string;
 	export const XDG_CURRENT_DESKTOP: string;
 	export const GIO_MODULE_DIR_VSCODE_SNAP_ORIG: string;
@@ -101,6 +101,7 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const TERM_PROGRAM: string;
 	export const npm_lifecycle_script: string;
+	export const SSH_AGENT_LAUNCHER: string;
 	export const SSH_AUTH_SOCK: string;
 	export const GSETTINGS_SCHEMA_DIR: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
@@ -108,7 +109,6 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
 	export const QT_ACCESSIBILITY: string;
-	export const NO_AT_BRIDGE: string;
 	export const GDMSESSION: string;
 	export const LESSCLOSE: string;
 	export const GTK_PATH_VSCODE_SNAP_ORIG: string;
@@ -162,7 +162,6 @@ declare module '$env/dynamic/private' {
 		USER: string;
 		npm_config_user_agent: string;
 		GIO_MODULE_DIR: string;
-		SSH_AGENT_PID: string;
 		XDG_SESSION_TYPE: string;
 		GIT_ASKPASS: string;
 		GTK_EXE_PREFIX_VSCODE_SNAP_ORIG: string;
@@ -188,6 +187,7 @@ declare module '$env/dynamic/private' {
 		npm_config_userconfig: string;
 		npm_config_local_prefix: string;
 		DBUS_STARTER_BUS_TYPE: string;
+		SYSTEMD_EXEC_PID: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
 		COLORTERM: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
@@ -195,6 +195,7 @@ declare module '$env/dynamic/private' {
 		npm_config_metrics_registry: string;
 		MANDATORY_PATH: string;
 		IM_CONFIG_PHASE: string;
+		GTK_IM_MODULE: string;
 		LOGNAME: string;
 		JOURNAL_STREAM: string;
 		_: string;
@@ -221,7 +222,6 @@ declare module '$env/dynamic/private' {
 		GDK_BACKEND: string;
 		DISPLAY: string;
 		LOCPATH: string;
-		npm_config_legacy_peer_deps: string;
 		LANG: string;
 		XDG_CURRENT_DESKTOP: string;
 		GIO_MODULE_DIR_VSCODE_SNAP_ORIG: string;
@@ -232,6 +232,7 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		TERM_PROGRAM: string;
 		npm_lifecycle_script: string;
+		SSH_AGENT_LAUNCHER: string;
 		SSH_AUTH_SOCK: string;
 		GSETTINGS_SCHEMA_DIR: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
@@ -239,7 +240,6 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		npm_lifecycle_event: string;
 		QT_ACCESSIBILITY: string;
-		NO_AT_BRIDGE: string;
 		GDMSESSION: string;
 		LESSCLOSE: string;
 		GTK_PATH_VSCODE_SNAP_ORIG: string;

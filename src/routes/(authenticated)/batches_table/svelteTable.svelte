@@ -12,6 +12,8 @@
   let editData: any;
   let deleteId: any[]=[];
   let showDialog = false;
+  let batchFilter ="";
+  let isLoading = true;
 
   function handleDialogSubmit() {
     deleteBatch(deleteId);
@@ -32,7 +34,7 @@
   /**
    * @type {any[]}
    */
-  let data = [];
+  let data:any[] = [];
   const batchDate = (dateString: String) => {
     const dateObj = new Date(dateString.valueOf());
     const year = dateObj.getFullYear();
@@ -42,9 +44,15 @@
     return formattedDate;
   };
   const getBatches = async () => {
+    isLoading=true;
     const response = await fetch("http://localhost:3000/batches");
     const json = await response.json();
     data = json;
+    batchData();
+    isLoading=false;
+  };
+
+  function batchData(){
     newData = data.map((item: any) => {
       const batch_name = item.batch_name;
       const batch_status = item.batch_status;
@@ -60,7 +68,7 @@
         end_date,
       };
     });
-  };
+  }
   onMount(() => getBatches());
 
   const openAdd = () => {
@@ -143,6 +151,17 @@ const deleteCheckbox =()=>{
   deleteId=deleteData.map((item: { batch_name: any; }) => item.batch_name)
 }
 
+function filterData() {
+    if (!batchFilter) {
+      batchData();
+    }
+     else {
+      newData = data.filter((item:any) => {
+        return item.batch_name.includes(batchFilter);
+      });
+    }
+  }
+
 </script>
 
 <template>
@@ -155,13 +174,23 @@ const deleteCheckbox =()=>{
     <div>
       <h2>Batches</h2>
     </div>
-    <div>
+    <div style="display: flex;
+    align-items: center;">
+      <div>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" bind:value={batchFilter} on:input={() => filterData()} placeholder="Filter by Batch Name" />
+      </div>    
       {#if showDeleteButton}
-      <button class="btn btn-danger" style={`margin-right: 1rem;`} on:click={deleteCheckbox} >Delete</button>
+      <button class="btn btn-danger" style={`margin-left: 1rem;`} on:click={deleteCheckbox} >Delete</button>
     {/if}
-      <button class="btn btn-info" on:click={openAdd}>+ Add Batch</button>
+      <button class="btn btn-info" style={`margin-left: 1rem`} on:click={openAdd}>+ Add Batch</button>
     </div>
   </div>
+  {#if isLoading}
+      <div class="loading">
+        <div class="loadingSpinner"></div>
+        Loading...
+      </div>
+    {:else}
   <table class="data-table">
     <thead>
       <tr>
@@ -171,6 +200,13 @@ const deleteCheckbox =()=>{
       </tr>
     </thead>
     <tbody>
+      {#if newData.length === 0}
+          <tr>
+            <td colspan={columns.length}>
+              <div class="no-records">No records found.</div>
+            </td>
+          </tr>       
+      {:else}
       {#each newData as row,rowIndex}
         <tr>
           {#each columns as column}
@@ -195,8 +231,10 @@ const deleteCheckbox =()=>{
           {/each}
         </tr>
       {/each}
+      {/if}
     </tbody>
   </table>
+  {/if}
 </template>
 {#if addModal.showModal}
   <AddBatchModal
@@ -274,4 +312,36 @@ const deleteCheckbox =()=>{
     width: 19rem;
     color: black;
   }
+
+  .no-records {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+  }
+
+  .loading {
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: #777;
+      }
+
+      .loadingSpinner {
+        border: 4px solid rgba(0, 0, 0, 0.3);
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 </style>

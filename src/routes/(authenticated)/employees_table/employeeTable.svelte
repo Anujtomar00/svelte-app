@@ -18,6 +18,8 @@
   let id: any;
   let deleteId:any;
   let showDialog = false;
+  let batchFilter = "";
+  let isLoading = true;
 
   function handleDialogSubmit() {
     deleteEmployee(deleteId);
@@ -30,7 +32,7 @@
     { id: "employee_batch", label: "Batch" },
     { id: "employee_status", label: "Status" },
     { id: "employee_email", label: "Email" },
-    { id: "practice", label: "Practice" },
+    { id: "practice", label: "Aligned" },
     { id: "actions", label: "" },
   ];
   /**
@@ -40,33 +42,19 @@
   /**
    * @type {any[]}
    */
-  let data = [];
+  let data: any[] = [];
   const getEmployee =async()=>{
+    isLoading = true;
     const response = await fetch("http://localhost:3000/employees");
     const json = await response.json();
     data = json;
-    newData = data.map((item: any) => {
-      const employee_name = item.employee_name;
-      const employee_id = item.employee_id;
-      const employee_batch = item.employee_batch;
-      const employee_status = item.employee_status;
-      const employee_number = item.employee_number;
-      const employee_email = item.employee_email;
-      const practice= item.practice;
-
-      return {
-        ...item,
-        employee_name,
-        employee_id,
-        employee_batch,
-        employee_status,
-        employee_number,
-        employee_email,
-        practice
-      };
-    });
+    employeeData();
+    isLoading = false;
   }
-  onMount(()=>getEmployee());
+  onMount(()=>{getEmployee();
+  filterData();
+  }
+)
 
   const openAdd = () => {
     addModal.showModal = true;
@@ -157,6 +145,40 @@ const deleteCheckbox =()=>{
   showDialog=true;
   deleteId=deleteData.map((item: { _id: any; }) => item._id)
 }
+
+function employeeData(){
+  newData = data.map((item: any) => {
+      const employee_name = item.employee_name;
+      const employee_id = item.employee_id;
+      const employee_batch = item.employee_batch;
+      const employee_status = item.employee_status;
+      const employee_number = item.employee_number;
+      const employee_email = item.employee_email;
+      const practice= item.practice;
+
+      return {
+        ...item,
+        employee_name,
+        employee_id,
+        employee_batch,
+        employee_status,
+        employee_number,
+        employee_email,
+        practice
+      };
+    })
+}
+
+function filterData() {
+    if (!batchFilter) {
+      employeeData();
+    }
+     else {
+      newData = data.filter((item:any) => {
+        return item.employee_batch.includes(batchFilter);
+      });
+    }
+  }
 </script>
 
 <template>
@@ -169,13 +191,23 @@ const deleteCheckbox =()=>{
     <div>
       <h2>Employees</h2>
     </div>
-    <div>
+    <div style="display: flex;
+    align-items: center;">
+      <div>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" bind:value={batchFilter} on:input={() => filterData()} placeholder="Filter by Batch" />
+      </div>      
       {#if showDeleteButton}
-      <button class="btn btn-danger" style={`margin-right: 1rem;`} on:click={deleteCheckbox} >Delete</button>
+      <button class="btn btn-danger" style={`margin-left: 1rem`} on:click={deleteCheckbox} >Delete</button>
     {/if}
-      <button class="btn btn-info" on:click={openAdd}>+ Add Employee</button>
+      <button class="btn btn-info" style={`margin-left: 1rem`} on:click={openAdd}>+ Add Employee</button>
     </div>
   </div>
+  {#if isLoading}
+      <div class="loading">
+        <div class="loadingSpinner"></div>
+        Loading...
+      </div>
+    {:else}
   <table class="data-table">
     <thead>
       <tr>
@@ -185,6 +217,13 @@ const deleteCheckbox =()=>{
       </tr>
     </thead>
     <tbody>
+      {#if newData.length === 0}
+          <tr>
+            <td colspan={columns.length}>
+              <div class="no-records">No records found.</div>
+            </td>
+          </tr>       
+      {:else}
       {#each newData as row,rowIndex}
         <tr>
           {#each columns as column}
@@ -215,8 +254,10 @@ const deleteCheckbox =()=>{
           {/each}
         </tr>
       {/each}
+      {/if}
     </tbody>
   </table>
+  {/if}
 </template>
 {#if addModal.showModal}
   <AddEmployeeModal showModal={addModal.showModal} renderEmployee={getEmployee}/>
@@ -299,4 +340,36 @@ const deleteCheckbox =()=>{
     width: 19rem;
     color: black;
   }
+
+  .no-records {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+  }
+
+  .loading {
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: #777;
+      }
+
+      .loadingSpinner {
+        border: 4px solid rgba(0, 0, 0, 0.3);
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 </style>
