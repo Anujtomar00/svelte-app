@@ -286,7 +286,11 @@
                 <option selected>Select practice</option>
                 <option value="KUP">KUP</option>
                 <option value="KIP">KIP</option>
-                <option value="Permanent">Permanent</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Devops">Devops</option>
+                <option value="Java">Java</option>
+                <option value="Test Automation">Test Automation</option>
+                <option value="Scala">Scala</option>
               </select>
             </div>
 

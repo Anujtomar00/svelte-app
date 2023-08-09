@@ -20,7 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "autoprefixer": "^10.4.7",
-    "chart.js": "^4.3.0",
+    "chart.js": "^4.3.2",
     "daisyui": "2.27.0",
     "debug": "4.3.4",
     "eslint": "^8.16.0",
@@ -33,7 +33,7 @@
     "postcss-load-config": "^4.0.1",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
-    "svelte": "^3.44.0",
+    "svelte": "^3.59.2",
     "svelte-check": "^2.7.1",
     "svelte-fa": "3.0.3",
     "svelte-preprocess": "^4.10.7",
@@ -45,7 +45,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@carbon/charts-svelte": "^1.11.13",
     "@material-ui/icons": "^4.11.3",
+    "apexcharts": "^3.41.1",
+    "d3": "^7.8.5",
+    "svelte-chartjs": "^3.1.2",
     "svelte-notifications": "^0.9.98",
     "svelte-toastify": "^0.0.27"
   }
