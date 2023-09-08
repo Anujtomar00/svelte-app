@@ -1,10 +1,19 @@
-<script>
+<script lang="ts">
   import { Doughnut } from "svelte-chartjs";
+  export let data1;
+  let data2 = data1.map((item: any) => {
+    const total_employee = item.total_employee;
+    return total_employee;
+  });
+  let dataLabel = data1.map((item: any) => {
+    const batch_name = item.batch_name;
+    return batch_name;
+  });
   const data = {
-    labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+    labels: dataLabel,
     datasets: [
       {
-        data: [300, 50, 100, 40, 120],
+        data: data2,
         backgroundColor: [
           "#F7464A",
           "#46BFBD",

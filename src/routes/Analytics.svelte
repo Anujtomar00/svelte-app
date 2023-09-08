@@ -1,69 +1,73 @@
 <!-- AnalyticalOverview.svelte -->
-<script>
+<script lang="ts">
+  import { onMount, afterUpdate } from "svelte";
   import SvelteTable from "./(authenticated)/batches_table/svelteTable.svelte";
-import Doughnut from "./Doughnut.svelte";
+  import Doughnut from "./Doughnut.svelte";
   import Piechart from "./Piechart.svelte";
 
-  const data = [
-    {
-      number: 120,
-      heading: "Total Sales",
-      subheading: "This Month",
-      color: "#f8bbd0",
-    }, // Light skin
-    {
-      number: 50,
-      heading: "New Customers",
-      subheading: "This Week",
-      color: "#DAF7A6 ",
-    }, // Light green
-    {
-      number: 85,
-      heading: "Product Rating",
-      subheading: "Out of 100",
-      color: "#90caf9",
-    }, // Light blue
-    {
-      number: 120,
-      heading: "Total Sales",
-      subheading: "This Month",
-      color: "#A6B1F7",
-    }, // Light skin
-    {
-      number: 50,
-      heading: "New Customers",
-      subheading: "This Week",
-      color: "#A6DAF7",
-    }, // Light green
-    // Add more data for additional cards
-  ];
+  let batchList: any[] = [];
+  let data: any[] = [];
+  let isLoading = true;
+  let colors: any[] = ["#f8bbd0", "#DAF7A6", "#90caf9", "#A6B1F7", "#A6DAF7"];
+
+  const getBatches = async () => {
+    isLoading = true;
+    const response = await fetch("http://localhost:3000/batches");
+    const json = await response.json();
+    batchList = json;
+    batchData();
+    isLoading = false;
+  };
+
+  function batchData() {
+    data = batchList.map((item: any, index) => {
+      const batch_name = item.batch_name;
+      const batch_status = item.batch_status;
+      const total_employee = item.total_employee;
+      const color = colors[index];
+      return {
+        ...item,
+        batch_name,
+        batch_status,
+        total_employee,
+        color,
+      };
+    });
+  }
+
+  onMount(() => getBatches());
 </script>
 
 <h2>Analytical Overview</h2>
-
-<div class="container">
-  <div class="card-box">
-    {#each data as item}
-      <div class="card" style="background-color: {item.color}; color: white;">
-        <h3 class="number">{item.number}</h3>
-        <h4 class="heading">{item.heading}</h4>
-        <p class="subheading">{item.subheading}</p>
+{#if isLoading}
+  <div class="loading">
+    <div class="loadingSpinner" />
+    Loading...
+  </div>
+{:else}
+  <div class="container">
+    <div class="card-box">
+      {#each data as item}
+        <div class="card" style="background-color: {item.color}; color: white;">
+          <h3 class="number">{item.total_employee}</h3>
+          <h4 class="heading">{item.batch_name}</h4>
+          <p class="subheading">{item.batch_status}</p>
+        </div>
+      {/each}
+    </div>
+    <div class="chart">
+      <div class="piechart">
+        <Piechart data1={data} />
       </div>
-    {/each}
-  </div>
-  <div class="chart">
-    <div class="piechart">
-      <Piechart />
+      <div class="doughnut">
+        <Doughnut data1={data} />
+      </div>
     </div>
-    <div class="doughnut">
-      <Doughnut />
+    <div style="margin-top: 5rem;  border: 1px solid #e1e4dd; padding:2rem">
+      <SvelteTable />
     </div>
   </div>
-  <div style="margin-top: 5rem;  border: 1px solid #e1e4dd; padding:2rem">
-    <SvelteTable />
-    </div>
-</div>
-
+{/if}
 
 <style>
   .container {
