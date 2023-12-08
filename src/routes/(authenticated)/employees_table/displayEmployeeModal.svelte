@@ -73,7 +73,7 @@
     />
     <div class="modal-content">
       <div class="prose" style="display: contents;">
-        <h1 class="text-4xl font-bold text-center mb-10">Employee Details</h1>
+        <h2 class="text-4xl font-bold text-center mb-10">Employee Details</h2>
         <div class="tab">
           <button class:selected={showSummary} on:click={handleSummary}>Details</button>
           <button class:selected={showTimeline} on:click={handleTimeline}>Timeline</button>
@@ -232,7 +232,7 @@
   }
 
   button.selected {
-    background-color: #2196f3;
+    background-color: #d60016;
     color: #fff;
   }
 
@@ -341,7 +341,7 @@
   
     .dialog-close-button {
       padding: 0.5rem 1rem;
-      background-color: #333;
+      background-color: #63666B;
       color: white;
       border: none;
       border-radius: 4px;

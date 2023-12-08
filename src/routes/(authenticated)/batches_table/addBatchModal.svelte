@@ -109,7 +109,7 @@
             id="batch_name"
             name="Batch Name"
             placeholder="Batch name..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}
           />
@@ -120,7 +120,7 @@
             id="start_date"
             name="Start Date"
             placeholder="Start date (dd/mm/yyyy)"
-            class="input input-bordered w-full"
+            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             required
             on:input={handleInput}
           />
@@ -131,14 +131,14 @@
             id="end_date"
             name="End Date"
             placeholder="End date (dd/mm/yyyy)"
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:change={handleInput}
           />
 
           <select
             id="status"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             on:input={handleInput}
             style="margin-top: 2rem;"
           >
@@ -153,14 +153,16 @@
             id="total_employee"
             name="Total Employees"
             placeholder="Total Employees..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}
           />
 
           <p class="flex items-center gap-4 mt-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn" on:click={handleClose}>Cancel</button>
+            <button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} type="submit">Submit</button>
+            <button class="btn" style={`background-color: #63666B;`} on:click={handleClose}>Cancel</button>
           </p>
         </form>
       </div>

@@ -46,7 +46,7 @@ function toggleTab() {
   }
 
   button.selected {
-    background-color: #2196f3;
+    background-color: #d60016;
     color: #fff;
   }
 </style>
