@@ -182,7 +182,7 @@ function filterData() {
       {#if showDeleteButton}
       <button class="btn btn-danger" style={`margin-left: 1rem;`} on:click={deleteCheckbox} >Delete</button>
     {/if}
-      <button class="btn btn-info" style={`margin-left: 1rem`} on:click={openAdd}>+ Add Batch</button>
+      <button class="btn btn-info" style={`margin-left: 1rem; background: red`} on:click={openAdd}>+ Add Batch</button>
     </div>
   </div>
   {#if isLoading}
