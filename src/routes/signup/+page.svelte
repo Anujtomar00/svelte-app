@@ -14,7 +14,7 @@
 
 <section class="max-w-sm mx-auto">
 	<div class="prose">
-		<h1>Sign Up</h1>
+		<h1 class="" style={`color: var(--app-primary-color, #d60016);`}>Sign Up</h1>
 	</div>
 
 	<form
@@ -49,7 +49,7 @@
 				type="email"
 				name="email"
 				placeholder="Email..."
-				class="input input-bordered w-full"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
 				required
 				value={form?.email ?? ""}
 			/>
@@ -59,7 +59,7 @@
 				type="password"
 				name="password"
 				placeholder="Password..."
-				class="input input-bordered w-full"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
 				required
 			/>
 		</p>
@@ -68,12 +68,14 @@
 				type="password"
 				name="password-confirm"
 				placeholder="Confirm password..."
-				class="input input-bordered w-full"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
 				required
 			/>
 		</p>
 		<p class="flex items-center gap-6 mt-6">
-			<button class="btn btn-primary">Sign Up</button>
+			<button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`}>Sign Up</button>
 			or
 			<a href="/login" class="link">Log In</a>
 		</p>

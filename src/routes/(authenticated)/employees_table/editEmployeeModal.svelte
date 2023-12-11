@@ -439,8 +439,10 @@
               </div>
 
               <p class="flex items-center gap-4 mt-12">
-                <button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn" on:click={handleClose} type="button"
+                <button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} type="submit">Submit</button>
+                <button class="btn" style={`background-color: #63666B;`} on:click={handleClose} type="button"
                   >Cancel</button
                 >
               </p>
