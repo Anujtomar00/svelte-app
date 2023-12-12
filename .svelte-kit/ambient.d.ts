@@ -146,6 +146,7 @@ declare module '$env/static/private' {
 	export const npm_package_json: string;
 	export const npm_package_name: string;
 	export const npm_package_version: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -295,6 +296,7 @@ declare module '$env/dynamic/private' {
 		npm_package_json: string;
 		npm_package_name: string;
 		npm_package_version: string;
+		NODE_ENV: string;
 		[key: string]: string | undefined;
 	}
 }
