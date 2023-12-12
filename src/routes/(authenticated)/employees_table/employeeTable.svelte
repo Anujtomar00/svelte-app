@@ -5,6 +5,7 @@
   import { derived } from "svelte/store";
   import Dialog from '../Dialog/dialog.svelte';
   import DisplayEmployeeModal from "./displayEmployeeModal.svelte";
+  import Employees from "../../../Data.json"
   const addModal = { showModal: false };
   const editModal = { showModal: false };
   const viewModal = { showModal: false };
@@ -45,9 +46,9 @@
   let data: any[] = [];
   const getEmployee =async()=>{
     isLoading = true;
-    const response = await fetch("http://localhost:3000/employees");
-    const json = await response.json();
-    data = json;
+    // const response = await fetch("http://localhost:3000/employees");
+    // const json = await response.json();
+    data = Employees.employees;
     employeeData();
     isLoading = false;
   }

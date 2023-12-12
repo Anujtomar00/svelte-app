@@ -3,6 +3,7 @@
   import AddBatchModal from "./addBatchModal.svelte";
   import EditBatchModal from "./editBatchModal.svelte";
   import Dialog from '../Dialog/dialog.svelte';
+  import Batches from "../../../Data.json"
   const addModal = { showModal: false };
   const editModal = { showModal: false };
   let showError = false;
@@ -45,9 +46,9 @@
   };
   const getBatches = async () => {
     isLoading=true;
-    const response = await fetch("http://localhost:3000/batches");
-    const json = await response.json();
-    data = json;
+    // const response = await fetch("http://localhost:3000/batches");
+    // const json = await response.json();
+    data = Batches.batches;
     batchData();
     isLoading=false;
   };

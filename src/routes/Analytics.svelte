@@ -4,6 +4,7 @@
   import SvelteTable from "./(authenticated)/batches_table/svelteTable.svelte";
   import Doughnut from "./Doughnut.svelte";
   import Piechart from "./Piechart.svelte";
+  import Batches from "../Data.json"
 
   let batchList: any[] = [];
   let data: any[] = [];
@@ -12,9 +13,9 @@
 
   const getBatches = async () => {
     isLoading = true;
-    const response = await fetch("http://localhost:3000/batches");
-    const json = await response.json();
-    batchList = json;
+    // const response = await fetch("http://localhost:3000/batches");
+    // const json = await response.json();
+    batchList = Batches.batches;
     batchData();
     isLoading = false;
   };
