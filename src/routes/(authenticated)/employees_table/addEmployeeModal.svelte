@@ -182,7 +182,7 @@
     
     <div class="modal-content">
       <div class="prose" style="display: contents;">
-        <h1 class="text-4xl font-bold text-center mb-4">Add Employee</h1>
+        <h3 class="text-4xl font-bold text-center mb-4">Add Employee</h3>
         <form on:submit={handleSubmit}>
         <div class="grid-container">
           <div class="bg-aliceblue p-4 shadow-md">
@@ -195,7 +195,7 @@
             id="employee_name"
             name="name"
             placeholder="Employee name..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}
           />
@@ -206,14 +206,14 @@
             id="employee_id"
             name="id"
             placeholder="Employee Id..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}
           />
 
           <select
             id="employee_batch"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             on:input={handleInput}
             style="margin-top: 2rem;"
           >
@@ -229,14 +229,14 @@
             id="employee_email"
             name="email"
             placeholder="Employee email..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}
           />
 
           <select
             id="employee_status"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             on:input={handleInput}
             style="margin-top: 2rem;"
           >
@@ -249,7 +249,7 @@
 
           <select
             id="practice"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             on:input={handleInput}
             style="margin-top: 2rem;"
           >
@@ -275,7 +275,7 @@
               id="personal_email"
               name="email"
               placeholder="Personal Email..."
-              class="input input-bordered w-full"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
               required
               on:input={handleInput}/>
 
@@ -285,7 +285,7 @@
               id="age"
               name="number"
               placeholder="Age..."
-              class="input input-bordered w-full"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
               required
               on:input={handleInput}/>
 
@@ -295,13 +295,13 @@
             id="dob"
             name="text"
             placeholder="Date of Birth..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}/>
 
             <select
             id="gender"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
             on:input={handleInput}
             style="margin-top: 2rem;"
           >
@@ -316,7 +316,7 @@
             id="phone_number"
             name="number"
             placeholder="Phone Number..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}/>
 
@@ -326,7 +326,7 @@
             id="github_id"
             name="text"
             placeholder="GitHub ID..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}/>
 
@@ -336,7 +336,7 @@
             id="address"
             name="text"
             placeholder="Address..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             on:input={handleInput}/>
           </div>
@@ -352,7 +352,7 @@
           id="degree"
           name="text"
           placeholder="Degree..."
-          class="input input-bordered w-full"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
           required
           on:input={handleInput}/>
 
@@ -362,7 +362,7 @@
           id="college_name"
           name="text"
           placeholder="College Name..."
-          class="input input-bordered w-full"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
           required
           on:input={handleInput}/>
 
@@ -372,7 +372,7 @@
           id="completion_year"
           name="text"
           placeholder="Date of Completion..."
-          class="input input-bordered w-full"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
           required
           on:input={handleInput}/>
 
@@ -382,14 +382,16 @@
           id="percentage"
           name="percentage"
           placeholder="Percentage..."
-          class="input input-bordered w-full"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
           required
           on:input={handleInput}/>
         </div>
       </div>
           <p class="flex items-center gap-4 mt-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn" on:click={handleClose}>Cancel</button>
+            <button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} type="submit">Submit</button>
+            <button class="btn" style={`background-color: #63666B;`} on:click={handleClose}>Cancel</button>
           </p>
         </div>
       </form>

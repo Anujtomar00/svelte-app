@@ -1,0 +1,103 @@
+{
+    "batches": [
+      {
+        "batch_name": "Nov_2021",
+        "batch_status": "In Progress",
+        "createdAt": "2023-06-28T20:39:11.514Z",
+        "end_date": "2002-01-01T00:00:00.000Z",
+        "start_date": "2023-12-12T00:00:00.000Z",
+        "total_employee": 12,
+        "_id": "649c9a6f76d583af3409c2c6"
+      },
+      {
+        "batch_name": "Dec_2021",
+        "batch_status": "Completed",
+        "createdAt": "2023-07-15T15:20:30.123Z",
+        "end_date": "2023-01-01T00:00:00.000Z",
+        "start_date": "2023-01-01T00:00:00.000Z",
+        "total_employee": 20,
+        "_id": "74d9e8b3a1c67b2f7e2a891d"
+      },
+      {
+        "batch_name": "Mar_2022",
+        "batch_status": "Planned",
+        "createdAt": "2023-08-20T10:45:00.789Z",
+        "end_date": "2023-04-01T00:00:00.000Z",
+        "start_date": "2023-02-15T00:00:00.000Z",
+        "total_employee": 15,
+        "_id": "89c5f7a2183d6b4e5f2a6b8a"
+      },
+      {
+        "batch_name": "Apr_2022",
+        "batch_status": "In Progress",
+        "createdAt": "2023-09-10T18:30:45.632Z",
+        "end_date": "2023-05-01T00:00:00.000Z",
+        "start_date": "2023-03-10T00:00:00.000Z",
+        "total_employee": 18,
+        "_id": "c6a9b5d3f28713e4d81a23c9"
+      },
+      {
+        "batch_name": "May_2022",
+        "batch_status": "Canceled",
+        "createdAt": "2023-10-05T12:15:20.456Z",
+        "end_date": "2023-06-01T00:00:00.000Z",
+        "start_date": "2023-04-15T00:00:00.000Z",
+        "total_employee": 10,
+        "_id": "a2b4c6d8e9f1a3b2c7d8e9f1"
+      }
+
+    ],
+    "employees":[
+        {
+                "employee_batch": "Jan_2021",
+                "employee_details": {
+                  "age": 22,
+                  "dob": "21 Apr 2000",
+                  "address": "Varanasi",
+                "github_id": "devansh-kapoor",
+                "personal_email": "devansh@gmail.com",
+                "phone_number": 985798422,
+                "gender": "Male",
+                "education": {
+                  "degree": "B.Tech",
+                  "completion_year": "31 Dec 2020",
+                  "college_name": "ABES",
+                  "percentage": "80%"
+                }
+            },
+                "employee_email": "devanshk.kapoor@nashtechglobal.com",
+                "employee_id": 123,
+                "employee_name": "Devansh",
+                "employee_number": 0,
+                "employee_status": "Completed",
+                "practice": "Frontend",
+                "_id": "64a5b095882672c33b97eb3d"
+              },
+              {
+                "employee_batch": "Feb_2022",
+                "employee_details": {
+                  "age": 25,
+                  "dob": "15 Sep 1997",
+                  "address": "Bangalore",
+                "github_id": "john-doe",
+                "personal_email": "john.doe@example.com",
+                "phone_number": 987654321,
+                "gender": "Male",
+                "education": {
+                  "degree": "M.S.",
+                  "completion_year": "30 Jun 2021",
+                  "college_name": "Tech University",
+                  "percentage": "85%"
+                }
+            },
+                "employee_email": "john.doe@company.com",
+                "employee_id": 456,
+                "employee_name": "John Doe",
+                "employee_number": 1,
+                "employee_status": "In Progress",
+                "practice": "Backend",
+                "_id": "64a5b095882672c33b97eb3e"
+              }
+
+    ]
+  }

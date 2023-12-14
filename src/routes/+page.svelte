@@ -5,7 +5,6 @@
 
 {#if $session?.user}
   <div class="prose custom-prose-container p-4">
-    <h1>Learning & Development Management</h1>
     <div class="dashboard">
       <Analytics />
 		<!-- <div class="dashboard-button">
@@ -16,7 +15,10 @@
   </div>
 {:else}
   <div class="prose lg:prose-lg" style="margin-left:7rem;">
-    <h1>Learning & Development Management</h1>
+    <h1 class="" style={` -webkit-text-fill-color: #0000;
+    background: -webkit-linear-gradient(270deg,#d6001c -54.17%,#6d297b);
+    background-clip: text;
+    -webkit-background-clip: text;`}>Learning & Development Management</h1>
     <p>This project shows you how to manage the progress of Interns.</p>
     <p>
       In this project you can login to the system and can see the scores of
@@ -29,8 +31,10 @@
       deserunt.
     </p>
     <p class="flex items-center gap-4 mt-12">
-      <a href="/signup" class="btn btn-primary">Sign Up</a>
-      <a href="/login" class="btn" style="color:white;">Log In</a>
+      <a href="/signup" class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`}>Sign Up</a>
+      <a href="/login" class="btn" style="color:white; background-color: #63666B; border: none;">Log In</a>
     </p>
   </div>
 {/if}

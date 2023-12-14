@@ -121,7 +121,7 @@
             id="batch_name"
             name="name"
             placeholder="Batch name..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             bind:value={editData.batch_name}
             on:change={handleInput}
@@ -133,7 +133,7 @@
             id="start_date"
             name="date"
             placeholder="Start date..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             value={editData.start_date}
             on:change={handleInput}
@@ -145,7 +145,7 @@
             id="end_date"
             name="date"
             placeholder="End date..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             value={editData.end_date}
             on:change={handleInput}
@@ -153,7 +153,7 @@
 
           <select
           id="batch_status"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
           style="margin-top: 2rem;"
           bind:value={editData.batch_status}
           on:change={handleInput}
@@ -169,15 +169,17 @@
             id="total_employee"
             name="number"
             placeholder="Total Employees..."
-            class="input input-bordered w-full"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
             required
             value={editData.total_employee}
             on:change={handleInput}
           />
 
           <p class="flex items-center gap-4 mt-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn" on:click={handleClose} type="button"
+            <button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} type="submit">Submit</button>
+            <button class="btn" style={`background-color: #63666B;`}  on:click={handleClose} type="button"
               >Cancel</button
             >
           </p>

@@ -20,10 +20,12 @@
         <!-- Dialog content goes here -->
         <slot></slot>
         <div class="flex  mt-8">
-          <button class="btn btn-primary mr-2" on:click={handleSubmit}>
+          <button class="btn btn-primary mr-2"  style={`background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} on:click={handleSubmit}>
             Delete
           </button>
-          <button class="btn" on:click={handleClose}>
+          <button class="btn"  style={`margin-left: 1rem; background-color: #63666B;`} on:click={handleClose}>
             Close
           </button>
         </div>

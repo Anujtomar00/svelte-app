@@ -14,7 +14,10 @@ function toggleTab() {
   class="prose"
   style="display:flex; justify-content:center; flex-direction:column; margin-bottom:3%; "
 >
-  <h1>Dashboard</h1>
+  <h1 style=" -webkit-text-fill-color: #0000;
+    background: -webkit-linear-gradient(270deg,#d6001c -54.17%,#6d297b);
+    background-clip: text;
+    -webkit-background-clip: text;">Dashboard</h1>
 </div>
 <div class="tab">
   <button class:selected={isBatches} on:click={toggleTab}>Batches</button>
@@ -46,7 +49,7 @@ function toggleTab() {
   }
 
   button.selected {
-    background-color: #2196f3;
+    background-color: #d60016;
     color: #fff;
   }
 </style>

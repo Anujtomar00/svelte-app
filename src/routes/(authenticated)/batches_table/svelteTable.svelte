@@ -3,6 +3,7 @@
   import AddBatchModal from "./addBatchModal.svelte";
   import EditBatchModal from "./editBatchModal.svelte";
   import Dialog from '../Dialog/dialog.svelte';
+  import Batches from "../../../Data.json"
   const addModal = { showModal: false };
   const editModal = { showModal: false };
   let showError = false;
@@ -45,9 +46,9 @@
   };
   const getBatches = async () => {
     isLoading=true;
-    const response = await fetch("http://localhost:3000/batches");
-    const json = await response.json();
-    data = json;
+    // const response = await fetch("http://localhost:3000/batches");
+    // const json = await response.json();
+    data = Batches.batches;
     batchData();
     isLoading=false;
   };
@@ -172,17 +173,19 @@ function filterData() {
 "
   >
     <div>
-      <h2>Batches</h2>
+      <h2 style={`color: var(--app-primary-color, #d60016);`}>Batches</h2>
     </div>
     <div style="display: flex;
     align-items: center;">
       <div>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" bind:value={batchFilter} on:input={() => filterData()} placeholder="Filter by Batch Name" />
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-rgb(214, 0, 28) focus:shadow-outline" type="text" bind:value={batchFilter} on:input={() => filterData()} placeholder="Filter by Batch Name" />
       </div>    
       {#if showDeleteButton}
-      <button class="btn btn-danger" style={`margin-left: 1rem;`} on:click={deleteCheckbox} >Delete</button>
+      <button class="btn btn-danger" style={`margin-left: 1rem; background-color: #63666B;`} on:click={deleteCheckbox} >Delete</button>
     {/if}
-      <button class="btn btn-info" style={`margin-left: 1rem; background: red`} on:click={openAdd}>+ Add Batch</button>
+      <button class="btn btn-info" style={`margin-left: 1rem; background-color: var(--app-primary-color, #d60016);
+    border: none;
+    color: white;`} on:click={openAdd}>+ Add Batch</button>
     </div>
   </div>
   {#if isLoading}
@@ -275,7 +278,7 @@ function filterData() {
 {#if showDialog}
 <Dialog isOpen={showDialog} on:close={() => showDialog = false} on:submit={handleDialogSubmit}>
 <div class="prose" >
-  <h1 style="margin-bottom: 0;">Delete</h1>
+  <h2 style="margin-bottom: 0;">Delete</h2>
   <p>Are you sure you want to delete?</p>
 </div>
 </Dialog>
