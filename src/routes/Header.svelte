@@ -15,18 +15,16 @@
 	import type { PageData } from "./$types";
 	$: menu_items = $session?.user
 		? [
-				
+			{
+					href: "/dashboard",
+					icon: faChartLine,
+					label: "Dashboard",
+				},
 				{
 					href: "/",
 					icon: faHome,
 					label: "Home",
 				},
-				{
-					href: "/dashboard",
-					icon: faChartLine,
-					label: "Dashboard",
-				},
-				
 				{
 					href: "/settings",
 					icon: faCog,

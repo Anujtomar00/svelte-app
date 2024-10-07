@@ -35,7 +35,7 @@
 				if (result.type === "success") {
 					const user = result.data?.user;
 					if (user) $session.user = user;
-					await goto("/dashboard");
+					await goto("/");
 				}
 			}}
 	>
