@@ -167,13 +167,13 @@
     width: 600px;
     border: 1px solid #e1e4dd;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
   }
 
-     @media (max-width: 1600px) and (min-width:1024px){
       .piechart, .doughnut {
         width: 48%;
       }
-    }
 
    @media (min-width: 340px) and (max-width: 1023px){
        .piechart {
@@ -195,6 +195,8 @@
           margin-top: 5rem;
           border: 1px solid #e1e4dd;
           border-radius: 10px;
+          display: flex;
+          justify-content: center;
       }
     }
 </style>

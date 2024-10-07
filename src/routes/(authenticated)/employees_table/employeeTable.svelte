@@ -237,14 +237,14 @@ function filterData() {
                     <img 
                       src="https://img.icons8.com/?size=512&id=11359&format=png"
                       alt="edit"
-                      style="height: 37px; cursor:pointer;"
+                      style="height: 25px; cursor:pointer;"
                     />
                   </div>
                   <div  class="tooltip" data-tip="Edit" on:click={() => openEdit(row)} on:keydown={openEdit}>
                     <img
                       src="https://img.icons8.com/?size=512&id=71201&format=png"
                       alt="edit"
-                      style="height: 37px; cursor:pointer;"
+                      style="height: 25px; cursor:pointer;"
                     />
                   </div>
                 </div>
