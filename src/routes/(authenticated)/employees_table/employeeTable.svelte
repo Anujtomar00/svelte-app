@@ -186,7 +186,7 @@ function filterData() {
   <div
     class="prose max-w-none "
     style="display: flex; justify-content: space-between;
-  align-items: center;
+  align-items: center; width: 100%;
 "
   >
     <div>
