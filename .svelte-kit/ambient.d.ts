@@ -26,10 +26,12 @@
  * ```
  */
 declare module '$env/static/private' {
+	export const GJS_DEBUG_TOPICS: string;
 	export const LESSOPEN: string;
 	export const LANGUAGE: string;
 	export const USER: string;
 	export const npm_config_user_agent: string;
+	export const SSH_AGENT_PID: string;
 	export const XDG_SESSION_TYPE: string;
 	export const GIT_ASKPASS: string;
 	export const npm_node_execpath: string;
@@ -50,14 +52,12 @@ declare module '$env/static/private' {
 	export const MANAGERPID: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_local_prefix: string;
-	export const DBUS_STARTER_BUS_TYPE: string;
-	export const SYSTEMD_EXEC_PID: string;
 	export const DBUS_SESSION_BUS_ADDRESS: string;
 	export const COLORTERM: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 	export const COLOR: string;
 	export const NVM_DIR: string;
-	export const GTK_IM_MODULE: string;
+	export const IM_CONFIG_PHASE: string;
 	export const LOGNAME: string;
 	export const JOURNAL_STREAM: string;
 	export const _: string;
@@ -88,7 +88,6 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const TERM_PROGRAM: string;
 	export const npm_lifecycle_script: string;
-	export const SSH_AGENT_LAUNCHER: string;
 	export const SSH_AUTH_SOCK: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const SHELL: string;
@@ -98,6 +97,7 @@ declare module '$env/static/private' {
 	export const GDMSESSION: string;
 	export const LESSCLOSE: string;
 	export const GPG_AGENT_INFO: string;
+	export const GJS_DEBUG_OUTPUT: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const QT_IM_MODULE: string;
 	export const npm_config_globalconfig: string;
@@ -107,13 +107,13 @@ declare module '$env/static/private' {
 	export const XDG_CONFIG_DIRS: string;
 	export const ANDROID_HOME: string;
 	export const NVM_CD_FLAGS: string;
-	export const DBUS_STARTER_ADDRESS: string;
 	export const XDG_DATA_DIRS: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
-	export const NINJA_WELCOME_SHOWN: string;
+	export const NINJA_ENV: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -143,10 +143,12 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		GJS_DEBUG_TOPICS: string;
 		LESSOPEN: string;
 		LANGUAGE: string;
 		USER: string;
 		npm_config_user_agent: string;
+		SSH_AGENT_PID: string;
 		XDG_SESSION_TYPE: string;
 		GIT_ASKPASS: string;
 		npm_node_execpath: string;
@@ -167,14 +169,12 @@ declare module '$env/dynamic/private' {
 		MANAGERPID: string;
 		npm_config_userconfig: string;
 		npm_config_local_prefix: string;
-		DBUS_STARTER_BUS_TYPE: string;
-		SYSTEMD_EXEC_PID: string;
 		DBUS_SESSION_BUS_ADDRESS: string;
 		COLORTERM: string;
 		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 		COLOR: string;
 		NVM_DIR: string;
-		GTK_IM_MODULE: string;
+		IM_CONFIG_PHASE: string;
 		LOGNAME: string;
 		JOURNAL_STREAM: string;
 		_: string;
@@ -205,7 +205,6 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		TERM_PROGRAM: string;
 		npm_lifecycle_script: string;
-		SSH_AGENT_LAUNCHER: string;
 		SSH_AUTH_SOCK: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		SHELL: string;
@@ -215,6 +214,7 @@ declare module '$env/dynamic/private' {
 		GDMSESSION: string;
 		LESSCLOSE: string;
 		GPG_AGENT_INFO: string;
+		GJS_DEBUG_OUTPUT: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		QT_IM_MODULE: string;
 		npm_config_globalconfig: string;
@@ -224,13 +224,13 @@ declare module '$env/dynamic/private' {
 		XDG_CONFIG_DIRS: string;
 		ANDROID_HOME: string;
 		NVM_CD_FLAGS: string;
-		DBUS_STARTER_ADDRESS: string;
 		XDG_DATA_DIRS: string;
 		npm_config_global_prefix: string;
 		npm_command: string;
 		INIT_CWD: string;
 		EDITOR: string;
-		NINJA_WELCOME_SHOWN: string;
+		NINJA_ENV: string;
+		NODE_ENV: string;
 		[key: string]: string | undefined;
 	}
 }

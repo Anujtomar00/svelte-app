@@ -45,6 +45,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
     "@carbon/charts-svelte": "^1.11.13",
     "@material-ui/icons": "^4.11.3",
     "apexcharts": "^3.41.1",

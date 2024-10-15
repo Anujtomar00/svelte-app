@@ -1,14 +1,22 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { Doughnut } from "svelte-chartjs";
-  export let data1;
-  let data2 = data1.map((item: any) => {
-    const total_employee = item.total_employee;
-    return total_employee;
-  });
-  let dataLabel = data1.map((item: any) => {
-    const batch_name = item.batch_name;
-    return batch_name;
-  });
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+    CategoryScale,
+  } from "chart.js";
+
+  ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+
+  export let data1: any[];
+
+  let data2 = data1.map((item: any) => item.total_employee);
+  let dataLabel = data1.map((item: any) => item.batch_name);
+
   const data = {
     labels: dataLabel,
     datasets: [
@@ -32,16 +40,67 @@
     ],
   };
 
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    CategoryScale,
-  } from "chart.js";
+  let chartContainer: HTMLDivElement;
 
-  ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
+  const resizeChart = () => {
+    if (chartContainer) {
+      const containerWidth = chartContainer.offsetWidth;
+      const size = Math.min(containerWidth, 400); // Max size of 400px
+      chartContainer.style.height = `${size}px`;
+    }
+  };
+
+  onMount(() => {
+    resizeChart();
+    window.addEventListener('resize', resizeChart);
+
+    return () => {
+      window.removeEventListener('resize', resizeChart);
+    };
+  });
 </script>
 
-<Doughnut {data} options={{ responsive: true }} />
+<div class="chart-container" bind:this={chartContainer}>
+  <Doughnut 
+    {data} 
+    options={{ 
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            boxWidth: 12,
+            padding: 15,
+            font: {
+              size: 12
+            }
+          }
+        },
+        title: {
+          display: true,
+          text: 'Employee Distribution',
+          font: {
+            size: 16
+          }
+        }
+      }
+    }} 
+  />
+</div>
+
+<style>
+  .chart-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 480px) {
+    .chart-container {
+      padding: 0.5rem;
+    }
+  }
+</style>

@@ -14,15 +14,49 @@
 	$: log("form:", form);
 </script>
 
+<style>
+	/* Mobile responsive styles */
+	@media (max-width: 640px) {
+		.prose h1 {
+			font-size: 1.5rem; /* Adjust the size for mobile */
+			line-height: 1.2; /* Increase line height for readability */
+			margin-left: -500px;
+		}
+		input{
+			width: 80vw;
+			margin-left: -220px;
+		}
+		.buttonlogin{
+			width: 50vw;
+			margin-left: -150px;
+		}
+
+		.flex {
+			flex-direction: column; /* Stack elements vertically */
+		}
+
+		.btn {
+			width: 100%; /* Full width for buttons */
+		}
+	}
+
+	/* General styles for better appearance */
+	.prose h1 {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	.btn {
+		width: auto; /* Auto width for larger screens */
+	}
+</style>
+
 <section class="max-w-sm mx-auto">
 	<div class="prose">
-		<h1 class="" style={` -webkit-text-fill-color: #0000;
-    background: -webkit-linear-gradient(270deg,#d6001c -54.17%,#6d297b);
-    background-clip: text;
-    -webkit-background-clip: text;`}>Log In</h1>
-		<!-- <p>
-			Use email <code>a@b.com</code> and password <code>asdfasdf</code> to login.
-		</p> -->
+		<h1 style={` -webkit-text-fill-color: #0000;
+			background: -webkit-linear-gradient(270deg,#d6001c -54.17%,#6d297b);
+			background-clip: text;
+			-webkit-background-clip: text;`}>Log In</h1>
 	</div>
 	<form
 		class="flex flex-col gap-6 my-6"
@@ -33,9 +67,6 @@
 
 				await applyAction(result);
 
-				// TODO: this is kinda a hack since redirecting in the
-				// action doesn't work because we can't also update page
-				// data.
 				if (result.type === "success") {
 					const user = result.data?.user;
 					if (user) $session.user = user;
@@ -58,7 +89,7 @@
 				type="email"
 				name="email"
 				placeholder="Email..."
-				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
 				required
 				value={form?.email ?? ""}
 			/>
@@ -69,23 +100,14 @@
 				type="password"
 				name="password"
 				placeholder="Password..."
-				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
 				required
 			/>
 		</p>
-		<p class="flex items-center gap-6 mt-6">
-			<button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
-    border: none;
-    color: white;`}>Log In</button>
-			<!-- or
-			<a href="/signup" class="link">Sign Up</a> -->
+		<p  class="buttonlogin flex gap-6 mt-6">
+			<button class=" btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+				border: none;
+				color: white;`}>Log In</button>
 		</p>
 	</form>
-
-	<!-- {#if form}
-		<section class="my-12 prose">
-			<h3>Form data:</h3>
-			<pre>{JSON.stringify(form, null, 2)}</pre>
-		</section>
-	{/if} -->
 </section>

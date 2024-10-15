@@ -13,9 +13,10 @@
 	import Fa from "svelte-fa";
 	import "../app.postcss";
 	import type { PageData } from "./$types";
+
 	$: menu_items = $session?.user
 		? [
-			{
+				{
 					href: "/dashboard",
 					icon: faChartLine,
 					label: "Dashboard",
@@ -51,43 +52,52 @@
 		  ];
 </script>
 
-<header class="bg-base-200 px-6" style="  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);">
-	<div class="max-w-screen-xxl mx-auto flex items-center py-2">
-		<h1>
-			<a href="/" >
-				<img src="https://www.nashtechglobal.com/wp-content/uploads/2023/03/nashTech-logo-red.svg" alt="logo" style="max-width: 74%;">
-			</a>
-		</h1>
-		<div style="display: flex;
-		line-height: 44px;
-		margin-left: auto;">
-		{#if $session.user}
-		<p>🎉 Hello there <strong>{$session.user?.email}</strong></p>
-		{/if}
-		<nav class="dropdown dropdown-end ml-auto">
-			<label tabindex="0" class="btn btn-ghost gap-3">
-				<Fa icon={faBars} />
-				Menu
-			</label>
-			
-			<ul
-				tabindex="0"
-				class="dropdown-content menu p-2 shadow-md bg-base-200 rounded-box w-52 "
-			>
-			
-				{#each menu_items as item}
-					<li>
-						<a
-							href={item.href}
-							data-sveltekit-reload={item.reload ? "" : "off"}
-						>
-							<Fa icon={item.icon} />
-							{item.label}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		</nav>
-	</div>
+<header class="bg-base-200 shadow-md w-full">
+	<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex items-center justify-between h-16">
+			<div class="flex-shrink-0">
+				<a href="/" class="block">
+					<img src="https://www.nashtechglobal.com/wp-content/uploads/2023/03/nashTech-logo-red.svg" alt="logo" class="h-8 w-auto">
+				</a>
+			</div>
+			<div class="flex items-center">
+				<!-- {#if $session.user}
+				<p class="hidden md:block mr-4">🎉 Hello <strong>{$session.user?.email}</strong></p>
+				{/if} -->
+				<nav class="relative">
+					<button class="btn btn-ghost gap-2" aria-haspopup="true" aria-expanded="false">
+						<Fa icon={faBars} />
+						<span class="hidden sm:inline">Menu</span>
+					</button>
+					<ul
+						class="absolute right-0 mt-2 w-48 bg-base-200 rounded-md shadow-lg py-1 z-10 hidden group-hover:block"
+						role="menu"
+						aria-orientation="vertical"
+						aria-labelledby="user-menu"
+					>
+						{#each menu_items as item}
+							<li>
+								<a
+									href={item.href}
+									data-sveltekit-reload={item.reload ? "" : "off"}
+									class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+									role="menuitem"
+								>
+									<Fa icon={item.icon} class="mr-2" />
+									{item.label}
+								</a>
+							</li>
+						{/each}
+					</ul>
+				</nav>
+			</div>
+		</div>
 	</div>
 </header>
+
+<style>
+	/* Add any additional styles here if needed */
+	nav:hover ul {
+		display: block;
+	}
+</style>
