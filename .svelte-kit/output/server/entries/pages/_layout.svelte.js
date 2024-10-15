@@ -1,7 +1,7 @@
 import { c as create_ssr_component, b as subscribe, e as escape, v as validate_component, d as each, f as add_attribute, g as set_store_value } from "../../chunks/index.js";
 import { p as page } from "../../chunks/stores.js";
 import { s as session } from "../../chunks/session.js";
-import { faChartLine, faCog, faSignOut, faSignIn, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faChartLine, faHome, faCog, faSignOut, faSignIn, faBars } from "@fortawesome/free-solid-svg-icons";
 import { F as Fa } from "../../chunks/fa.js";
 import debug from "debug";
 const app = "";
@@ -19,6 +19,7 @@ const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       icon: faChartLine,
       label: "Dashboard"
     },
+    { href: "/", icon: faHome, label: "Home" },
     {
       href: "/settings",
       icon: faCog,

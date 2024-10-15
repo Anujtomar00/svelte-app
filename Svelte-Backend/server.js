@@ -178,7 +178,7 @@ app.delete('/employees/:id', async(req, res) =>{
 
 mongoose.set("strictQuery", false)
 mongoose.
-connect('mongodb+srv://anujtomar:1234@svelte.fx1hsgx.mongodb.net/?retryWrites=true&w=majority')
+connect('mongodb://localhost:27017/svelteprod')
 .then(() => {
     console.log('connected to MongoDB')
     app.listen(3000, ()=> {

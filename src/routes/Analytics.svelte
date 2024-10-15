@@ -1,10 +1,8 @@
-<!-- AnalyticalOverview.svelte -->
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
-  import SvelteTable from "./(authenticated)/batches_table/svelteTable.svelte";
+  import { onMount } from "svelte";
   import Doughnut from "./Doughnut.svelte";
   import Piechart from "./Piechart.svelte";
-  import Batches from "../Data.json"
+  import Batches from "../Data.json";
 
   let batchList: any[] = [];
   let data: any[] = [];
@@ -13,190 +11,202 @@
 
   const getBatches = async () => {
     isLoading = true;
-    // const response = await fetch("http://localhost:3000/batches");
-    // const json = await response.json();
+    await new Promise(resolve => setTimeout(resolve, 1000));
     batchList = Batches.batches;
-    batchData();
     isLoading = false;
   };
 
-  function batchData() {
-    data = batchList.map((item: any, index) => {
-      const batch_name = item.batch_name;
-      const batch_status = item.batch_status;
-      const total_employee = item.total_employee;
-      const color = colors[index];
-      return {
-        ...item,
-        batch_name,
-        batch_status,
-        total_employee,
-        color,
-      };
-    });
+  $: if (batchList.length > 0) {
+    data = batchList.map((item: any, index) => ({
+      ...item,
+      color: colors[index % colors.length],
+    }));
   }
 
-  onMount(() => getBatches());
+  onMount(getBatches);
 </script>
 
-<h1 style={`color: var(--app-primary-color, #d60016);`}>Analytical Overview</h1>
-{#if isLoading}
-  <div class="loading">
-    <div class="loadingSpinner" />
-    Loading...
-  </div>
-{:else}
-  <div class="container">
-    <div class="card-box">
+<div class="container">
+  <h1 class="title">Analytical Overview</h1>
+  
+  {#if isLoading}
+    <div class="loading">
+      <div class="loading-spinner" />
+      <p>Loading...</p>
+    </div>
+  {:else}
+    <div class="card-container">
       {#each data as item}
-        <div class="card" style="background-color: {item.color}; color: white;">
-          <h3 style={`color: white;`} class="number">{item.total_employee}</h3>
-          <h4 style={`color: white;`} class="heading">{item.batch_name}</h4>
-          <p style={`color: white;`} class="subheading">{item.batch_status}</p>
+        <div class="card" style="background-color: {item.color};">
+          <h3 class="number">{item.total_employee}</h3>
+          <h4 class="heading">{item.batch_name}</h4>
+          <p class="subheading">{item.batch_status}</p>
         </div>
       {/each}
     </div>
-    <div class="chart">
-      <div class="piechart">
-        <Piechart data1={data} />
+    
+    <div class="chart-container">
+      <div class="chart">
+        <h2>Pie Chart</h2>
+        <div class="chart-wrapper">
+          <Piechart data1={data} />
+        </div>
       </div>
-      <div class="doughnut">
-        <Doughnut data1={data} />
+      <div class="chart">
+        <h2>Doughnut Chart</h2>
+        <div class="chart-wrapper">
+          <Doughnut data1={data} />
+        </div>
       </div>
     </div>
-  </div>
-{/if}
+  {/if}
+</div>
 
 <style>
   .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    /* background-color: #f3f3f3;  */
+    align-items: center;
+    overflow-x: hidden;
   }
-  .card-box {
+
+  .title {
+    color: var(--app-primary-color, #d60016);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .loading {
     display: flex;
-    flex-wrap: wrap;
-    background-color: #f3f3f3;
-    justify-content: space-between;
-    border-radius: 10px;
-      @media (max-width: 1400px) and (min-width: 999px) {
-      width: 117%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 1000px) and (min-width: 901px) {
-      width: 125%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 900px) and (min-width: 781px) {
-      width: 125%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 780px) and (min-width: 640px) {
-      width: 140%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 639px) and (min-width: 587px) {
-      width: 160%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 586px) and (min-width: 541px) {
-      width: 174%; /* Adjust width for smaller screens */
-    }
-      @media (max-width: 540px) and (min-width: 492px) {
-      width: 193%; /* Adjust width for smaller screens */
-    }
-      @media (max-width: 491px) and (min-width: 407px) {
-      width: 206%; /* Adjust width for smaller screens */
-    }
-       @media (max-width: 406px) and (min-width: 368px) {
-      width: 247%; /* Adjust width for smaller screens */
-    }
-      @media (max-width: 367px) and (min-width: 340px) {
-      width: 285%; /* Adjust width for smaller screens */
-    }
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
   }
+
+  .loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--app-primary-color, #d60016);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
   .card {
-    width: calc(20% - 20px);
-    padding: 20px;
+    padding: 1rem;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; 
+    color: white;
     transition: transform 0.3s ease;
-    box-sizing: border-box;
-    @media (max-width: 768px) {
-      width: calc(50% - 20px); /* Adjust width for smaller screens */
-    }
   }
 
   .card:hover {
     transform: scale(1.05);
   }
 
-  .card .number {
-    font-size: 36px;
+  .number {
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 0.6rem;
+    margin: 0;
   }
 
-  .card .heading {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
+  .heading {
+    font-size: 1rem;
+    margin: 0.5rem 0;
   }
 
-  .card .subheading {
-    font-size: 14px;
-    color: #888;
+  .subheading {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  .chart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    width: 100%;
   }
 
   .chart {
+    background-color: white;
+    border: 1px solid #e1e4dd;
+    border-radius: 10px;
+    padding: 1rem;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 5rem;
-  }
-
-  .piechart {
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    padding-top: 9rem;
-     padding-left: 1rem;
-    margin-right: 2rem;
-    border: 1px solid #e1e4dd;
-    border-radius: 10px;
+    box-sizing: border-box;
   }
 
-  .doughnut {
-    height: 600px;
-    width: 600px;
-    border: 1px solid #e1e4dd;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
+  .chart h2 {
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
-      .piechart, .doughnut {
-        width: 48%;
-      }
+  .chart-wrapper {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
 
-   @media (min-width: 340px) and (max-width: 1023px){
-       .piechart {
-          width: 129%;
-          margin-left: 12rem;
-          padding-top: 1rem;
-          padding-left: 4rem;
-          border: 1px solid #e1e4dd;
-          border-radius: 10px;
-      }
+  @media (max-width: 639px) {
+    .container {
+      padding: 0.5rem;
     }
 
-      @media (min-width: 340px) and (max-width: 1023px){
-       .doughnut {
-          width: 100%;
-          padding-top: 2rem;
-          height: 600px;
-          margin-left: 12rem;
-          margin-top: 5rem;
-          border: 1px solid #e1e4dd;
-          border-radius: 10px;
-          display: flex;
-          justify-content: center;
-      }
+    .chart-container {
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
     }
+
+    .chart {
+      padding: 0.5rem;
+      border-radius: 0;
+    }
+
+    .chart-wrapper {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .card-container {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .chart-wrapper {
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .chart-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-container {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
 </style>

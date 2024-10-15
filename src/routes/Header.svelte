@@ -61,9 +61,9 @@
 		<div style="display: flex;
 		line-height: 44px;
 		margin-left: auto;">
-		{#if $session.user}
+		<!-- {#if $session.user}
 		<p>🎉 Hello there <strong>{$session.user?.email}</strong></p>
-		{/if}
+		{/if} -->
 		<nav class="dropdown dropdown-end ml-auto">
 			<label tabindex="0" class="btn btn-ghost gap-3">
 				<Fa icon={faBars} />
