@@ -19,7 +19,7 @@ function toggleTab() {
     background-clip: text;
     -webkit-background-clip: text;">Dashboard</h1>
 </div>
-<div class="tab">
+<div class="tab" style="padding-left:0px">
   <button class:selected={isBatches} on:click={toggleTab}>Batches</button>
   <button class:selected={!isBatches} on:click={toggleTab}>Employees</button>
 </div>

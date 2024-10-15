@@ -16,19 +16,28 @@
     </div>
   </div>
 {:else}
-  <div style="margin-top: -100px;" class=" lg:prose-lg px-4 sm:px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto">
-    <h1 class="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Learning & Development Management</h1>
-    <p class="mb-4">This project shows you how to manage the progress of Interns.</p>
-    <p class="mb-4">
-      In this project you can login to the system and can see the scores of
-      interns with the help of charts and their score.
-    </p>
-    <p class="mb-4">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, vero
-      dolor! Deleniti minus, vel quis omnis rem tempore tenetur dignissimos
-      ullam debitis veniam aliquid molestiae labore sit vero! Deleniti,
-      deserunt.
-    </p>
+  <div
+    style="margin-top: -100px;"
+    class=" lg:prose-lg px-4 sm:px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto"
+  >
+    <div class="content">
+      <h1 class="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+        Learning & Development Management
+      </h1>
+      <p class="mb-4">
+        This project shows you how to manage the progress of Interns.
+      </p>
+      <p class="mb-4">
+        In this project you can login to the system and can see the scores of
+        interns with the help of charts and their score.
+      </p>
+      <p class="mb-4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, vero
+        dolor! Deleniti minus, vel quis omnis rem tempore tenetur dignissimos
+        ullam debitis veniam aliquid molestiae labore sit vero! Deleniti,
+        deserunt.
+      </p>
+    </div>
     <div class="flex flex-col sm:flex-row items-center gap-4 mt-8">
       <a href="/signup" class="btn btn-primary w-full sm:w-auto">Sign Up</a>
       <a href="/login" class="btn btn-secondary w-full sm:w-auto">Log In</a>
@@ -82,18 +91,27 @@
   }
 
   .btn-secondary {
-    background-color: #63666B;
+    background-color: #63666b;
     color: white;
     border: none;
   }
 
   @media (max-width: 640px) {
     .btn {
-      width: 100%;
+      width: 80vw;
+      margin-left: -500px;
+    }
+    .content{
+      width: 90vw;
+      margin-left: -80px;
+    }
+    .content h1{
+      text-align: center;
+      width: 100vw;
+      margin-left: -10px;
     }
   }
 
-  
   h1 + p {
     margin-top: 0.5rem;
   }

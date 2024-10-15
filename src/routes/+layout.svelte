@@ -25,7 +25,7 @@
 
 <Header />
 
-<main class="max-w-screen-xl mx-auto my-20 px-6 " style="max-width: 90%;">
+<main class="mx-auto my-20 px-20" style="width: 100%; min-width:900px;">
 	<slot />
 </main>
 

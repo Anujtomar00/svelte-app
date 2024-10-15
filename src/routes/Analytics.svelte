@@ -64,13 +64,13 @@
 
 <style>
   .container {
-    max-width: 1200px;
+    max-width: 100vw; 
     margin: 0 auto;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
+    overflow-x: hidden; 
   }
 
   .title {
@@ -170,7 +170,14 @@
 
   @media (max-width: 639px) {
     .container {
-      padding: 0.5rem;
+      width: 100vw;
+      margin-left: -95px;
+    }
+
+    .card-container {
+      grid-template-columns: 1fr;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
     }
 
     .chart-container {
@@ -181,6 +188,7 @@
     .chart {
       padding: 0.5rem;
       border-radius: 0;
+      width: 100vw;
     }
 
     .chart-wrapper {
