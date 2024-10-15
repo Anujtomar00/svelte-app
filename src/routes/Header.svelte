@@ -64,7 +64,7 @@
 				<!-- {#if $session.user}
 				<p class="hidden md:block mr-4">🎉 Hello <strong>{$session.user?.email}</strong></p>
 				{/if} -->
-				<nav class="relative">
+				<nav >
 					<button class="btn btn-ghost gap-2" aria-haspopup="true" aria-expanded="false">
 						<Fa icon={faBars} />
 						<span class="hidden sm:inline">Menu</span>
@@ -96,7 +96,7 @@
 </header>
 
 <style>
-	/* Add any additional styles here if needed */
+	
 	nav:hover ul {
 		display: block;
 	}

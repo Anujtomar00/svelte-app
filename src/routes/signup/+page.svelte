@@ -13,33 +13,16 @@
 </script>
 
 <style>
-	/* Mobile responsive styles */
 	@media (max-width: 640px) {
-		.prose h1 {
-			font-size: 1.5rem; /* Adjust the size for mobile */
-			line-height: 1.2; 
-			/* Increase line height for readability */
-			margin-left: -500px;
-		}
-		input{
-			width: 80vw;
-			margin-left: -220px;
-		}
-		.buttonlogin{
-			width: 50vw;
-			margin-left: -150px;
-		}
-
 		.flex {
-			flex-direction: column; /* Stack elements vertically */
+			flex-direction: column; 
 		}
 
 		.btn {
-			width: 100%; /* Full width for buttons */
+			width: 100%; 
 		}
 	}
 
-	/* General styles for better appearance */
 	.prose h1 {
 		font-size: 2rem;
 		text-align: center;
@@ -47,6 +30,11 @@
 
 	.btn {
 		width: auto; /* Auto width for larger screens */
+	}
+
+	/* Ensure no min-width is applied */
+	section {
+		min-width: 0; /* Override any inherited min-width */
 	}
 </style>
 

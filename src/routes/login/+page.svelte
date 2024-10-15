@@ -15,39 +15,28 @@
 </script>
 
 <style>
-	/* Mobile responsive styles */
 	@media (max-width: 640px) {
 		.prose h1 {
-			font-size: 1.5rem; /* Adjust the size for mobile */
-			line-height: 1.2; /* Increase line height for readability */
-			margin-left: -500px;
+			font-size: 1.5rem;
+			line-height: 1.2;
+			
 		}
-		input{
-			width: 80vw;
-			margin-left: -220px;
-		}
-		.buttonlogin{
-			width: 50vw;
-			margin-left: -150px;
-		}
-
+		
 		.flex {
-			flex-direction: column; /* Stack elements vertically */
+			flex-direction: column;
 		}
-
 		.btn {
-			width: 100%; /* Full width for buttons */
+			width: 100%;
 		}
 	}
 
-	/* General styles for better appearance */
 	.prose h1 {
 		font-size: 2rem;
 		text-align: center;
 	}
 
 	.btn {
-		width: auto; /* Auto width for larger screens */
+		width: auto;
 	}
 </style>
 
@@ -104,8 +93,8 @@
 				required
 			/>
 		</p>
-		<p  class="buttonlogin flex gap-6 mt-6">
-			<button class=" btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+		<p class="buttonlogin flex gap-6 mt-6">
+			<button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
 				border: none;
 				color: white;`}>Log In</button>
 		</p>

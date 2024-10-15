@@ -31,7 +31,7 @@
   
   {#if isLoading}
     <div class="loading">
-      <div class="loading-spinner" />
+      <div class="loading-spinner"></div>
       <p>Loading...</p>
     </div>
   {:else}
@@ -63,18 +63,29 @@
 </div>
 
 <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
   .container {
-    max-width: 100vw; 
+    max-width: 1200px; 
     margin: 0 auto;
-    padding: 1rem;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden; 
   }
 
   .title {
-    color: var(--app-primary-color, #d60016);
+    color: #d60016;
     font-size: 2rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -90,7 +101,7 @@
 
   .loading-spinner {
     border: 4px solid #f3f3f3;
-    border-top: 4px solid var(--app-primary-color, #d60016);
+    border-top: 4px solid #d60016;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -116,6 +127,7 @@
     text-align: center;
     color: white;
     transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
   .card:hover {
@@ -154,7 +166,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   .chart h2 {
@@ -170,25 +182,23 @@
 
   @media (max-width: 639px) {
     .container {
-      width: 100vw;
-      margin-left: -95px;
+      width: 100%;
+      padding: 1rem;
     }
 
     .card-container {
       grid-template-columns: 1fr;
-      margin-left: -0.5rem;
-      margin-right: -0.5rem;
     }
 
     .chart-container {
-      margin-left: -0.5rem;
+      margin-left: -10rem;
       margin-right: -0.5rem;
     }
 
     .chart {
       padding: 0.5rem;
       border-radius: 0;
-      width: 100vw;
+      width: 100%;
     }
 
     .chart-wrapper {
@@ -209,12 +219,6 @@
   @media (min-width: 768px) {
     .chart-container {
       grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .card-container {
-      grid-template-columns: repeat(5, 1fr);
     }
   }
 </style>
