@@ -521,6 +521,11 @@
     height: 95%;
     width: 50%;
   }
+  @media (max-width: 700px) {
+    .modal-content {
+    width: 90%;
+    }
+}
 
   form {
     max-width: 600px;

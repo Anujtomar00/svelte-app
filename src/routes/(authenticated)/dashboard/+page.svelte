@@ -9,7 +9,7 @@ function toggleTab() {
   isBatches = !isBatches;
 }
 </script>
-
+<div class="dashboard-container">
 <div
   class="prose"
   style="display:flex; justify-content:center; flex-direction:column; margin-bottom:3%; "
@@ -29,8 +29,17 @@ function toggleTab() {
 {#if !isBatches}
 <EmployeeTable />
 {/if}
+</div>
 
 <style>
+ .dashboard-container{
+    padding: 0rem 3rem
+  }
+@media (max-width: 670px) {
+  .dashboard-container{
+    padding:0rem
+  }
+}
   tab {
     display: flex;
     justify-content: center;

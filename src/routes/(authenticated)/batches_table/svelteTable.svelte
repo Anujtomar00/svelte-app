@@ -26,7 +26,7 @@
     { id: "total_employee", label: "Total Employees" },
     { id: "start_date", label: "Start Date" },
     { id: "end_date", label: "End Date" },
-    { id: "actions", label: "" },
+    { id: "actions", label: "Action" },
   ];
   /**
    * @type {any[]}
@@ -175,15 +175,15 @@ function filterData() {
       <h2 style={`color: var(--app-primary-color, #d60016);`}>Batches</h2>
     </div>
     <div style="display: flex;
-    align-items: center;">
+    align-items: center; margin-top:22px">
       <div>
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:border-rgb(214, 0, 28) focus:shadow-outline" type="text" bind:value={batchFilter} on:input={() => filterData()} placeholder="Filter by Batch Name" />
       </div>    
       {#if showDeleteButton}
-      <button class="btn btn-danger" style={`margin-left: 1rem; background-color: #63666B;`} on:click={deleteCheckbox} >Delete</button>
+      <button class="btn btn-danger" style={`margin-left: 1rem; background-color: #63666B; height:2.4rem; min-height:2.4rem`} on:click={deleteCheckbox} >Delete</button>
     {/if}
       <button class="btn btn-info" style={`margin-left: 1rem; background-color: var(--app-primary-color, #d60016);
-    border: none;
+    border: none; height:2.35rem; min-height:2.35rem;
     color: white;`} on:click={openAdd}>+ Add Batch</button>
     </div>
   </div>
@@ -193,6 +193,7 @@ function filterData() {
         Loading...
       </div>
     {:else}
+  <div class="table-container">
   <table class="data-table">
     <thead>
       <tr>
@@ -236,6 +237,7 @@ function filterData() {
       {/if}
     </tbody>
   </table>
+  </div>
   {/if}
 </template>
 {#if addModal.showModal}
@@ -284,25 +286,46 @@ function filterData() {
 {/if}
 
 <style>
-  .data-table {
+.table-container{
+   width: 100%;
+    overflow-x: auto;
+}
+ .data-table {
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     font-size: 14px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff; /* Set a background color for the table */
-  }
+    background-color: #fff;
+}
 
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff; /* Set a background color for the table */
-  }
+@media (max-width: 550px) {
+    .data-table {
+        width: 100%; 
+    }
+
+    .data-table thead th,
+    .data-table tbody td {
+        padding: 8px;
+        font-size: 12px; 
+    }
+
+    .prose.max-w-none {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .prose.max-w-none > div:first-child,
+    .prose.max-w-none > div:last-child {
+        width: 100%; 
+    }
+    .prose.max-w-none > div:last-child {
+        margin-top:-1rem;
+        margin-bottom: 2rem;
+    }
+}
+
 
   .data-table thead th {
     background-color: #f2f2f2;
