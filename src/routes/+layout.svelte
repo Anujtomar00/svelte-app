@@ -25,7 +25,7 @@
 
 <Header />
 
-<main class="mx-auto my-20 px-20" style="width: 100%;">
+<main class="mx-auto my-20 px-5" style="width: 100%;">
 	<slot />
 </main>
 
