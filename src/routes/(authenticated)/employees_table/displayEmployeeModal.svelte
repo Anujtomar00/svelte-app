@@ -18,7 +18,7 @@
     showSummary = false;
     showTimeline = true;
   }
-  
+
   const colors = {
     first: "#7CD5E2",
     second: "#FEC048",
@@ -53,9 +53,9 @@
         degree: "Bachelor of Science in Computer Science",
         college_name: "XYZ University",
         completion_year: "2016",
-        percentage: "85%"
-      }
-    }
+        percentage: "85%",
+      },
+    },
   };
 
   function handleClose(event: any) {
@@ -74,7 +74,7 @@
           <button class:selected={showSummary} on:click={handleSummary}>Details</button>
           <button class:selected={showTimeline} on:click={handleTimeline}>Timeline</button>
         </div>
-        
+
         {#if showSummary}
           <div class="grid-container">
             <div class="bg-aliceblue p-4 shadow-md">
@@ -216,13 +216,14 @@
   .modal-content {
     position: relative;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px; 
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
-    max-width: 90%;
+    max-width: 90%; 
     max-height: 90%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    margin: 0 10px; 
   }
 
   .tab {
@@ -244,49 +245,51 @@
     background-color: #f5f5f5;
     color: #555;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #e0e0e0;
   }
 
   .grid-container {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr; 
+    gap: 0.5rem;
     margin-top: 1rem;
   }
 
   .bg-aliceblue {
     background-color: aliceblue;
-    padding: 1rem;
+    padding: 0.5rem; 
     border-radius: 10px;
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem; 
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem; 
   }
 
   .info-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
-  }
-
-  .label {
-    font-weight: bold;
-  }
-
-  .value {
-    color: #333;
+    margin-bottom: 0.25rem; 
+    font-size: 0.9rem; 
   }
 
   .dialog-close-button {
-    padding: 0.5rem 1rem;
-    background-color: #63666B;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 10px 20px;
     margin-top: 1rem;
+    border: none;
+    background-color: #d60016;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .dialog-close-button:hover {
+    background-color: #b40012;
   }
 </style>
