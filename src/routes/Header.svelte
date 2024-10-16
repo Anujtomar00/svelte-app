@@ -64,7 +64,7 @@
 				<!-- {#if $session.user}
 				<p class="hidden md:block mr-4">🎉 Hello <strong>{$session.user?.email}</strong></p>
 				{/if} -->
-				<nav class="relative">
+				<nav >
 					<button class="btn btn-ghost gap-2" aria-haspopup="true" aria-expanded="false">
 						<Fa icon={faBars} />
 						<span class="hidden sm:inline">Menu</span>
@@ -75,19 +75,19 @@
 						aria-orientation="vertical"
 						aria-labelledby="user-menu"
 					>
-						{#each menu_items as item}
-							<li>
-								<a
-									href={item.href}
-									data-sveltekit-reload={item.reload ? "" : "off"}
-									class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-									role="menuitem"
-								>
-									<Fa icon={item.icon} class="mr-2" />
-									{item.label}
-								</a>
-							</li>
-						{/each}
+					{#each menu_items as item}
+					<li>
+						<a
+							href={item.href}
+							data-sveltekit-reload={item.reload ? "" : "off"}
+							class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+							role="menuitem"
+						>
+							<Fa icon={item.icon} class="mr-2" />
+							<span>{item.label}</span> <!-- Wrapped text in a span for more control -->
+						</a>
+					</li>
+				{/each}
 					</ul>
 				</nav>
 			</div>
