@@ -53,7 +53,7 @@
 </script>
 
 <header class="bg-base-200 shadow-md w-full">
-	<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+	<div class=" mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between h-16">
 			<div class="flex-shrink-0">
 				<a href="/" class="block">

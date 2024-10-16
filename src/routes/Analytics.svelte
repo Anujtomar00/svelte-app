@@ -191,7 +191,7 @@
     }
 
     .chart-container {
-      margin-left: -10rem;
+      margin-left: -1rem;
       margin-right: -0.5rem;
     }
 
