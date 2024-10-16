@@ -53,7 +53,7 @@
 </script>
 
 <header class="bg-base-200 shadow-md w-full">
-	<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+	<div class=" mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between h-16">
 			<div class="flex-shrink-0">
 				<a href="/" class="block">
@@ -75,19 +75,19 @@
 						aria-orientation="vertical"
 						aria-labelledby="user-menu"
 					>
-						{#each menu_items as item}
-							<li>
-								<a
-									href={item.href}
-									data-sveltekit-reload={item.reload ? "" : "off"}
-									class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-									role="menuitem"
-								>
-									<Fa icon={item.icon} class="mr-2" />
-									{item.label}
-								</a>
-							</li>
-						{/each}
+					{#each menu_items as item}
+					<li>
+						<a
+							href={item.href}
+							data-sveltekit-reload={item.reload ? "" : "off"}
+							class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+							role="menuitem"
+						>
+							<Fa icon={item.icon} class="mr-2" />
+							<span>{item.label}</span> <!-- Wrapped text in a span for more control -->
+						</a>
+					</li>
+				{/each}
 					</ul>
 				</nav>
 			</div>
