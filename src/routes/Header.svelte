@@ -53,7 +53,7 @@
 </script>
 
 <header class="bg-base-200 shadow-md w-full">
-	<div class=" mx-auto px-4 sm:px-6 lg:px-8">
+	<div class="mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center justify-between h-16">
 			<div class="flex-shrink-0">
 				<a href="/" class="block">
@@ -61,33 +61,30 @@
 				</a>
 			</div>
 			<div class="flex items-center">
-				<!-- {#if $session.user}
-				<p class="hidden md:block mr-4">🎉 Hello <strong>{$session.user?.email}</strong></p>
-				{/if} -->
-				<nav class="relative">
+				<nav class="relative group">
 					<button class="btn btn-ghost gap-2" aria-haspopup="true" aria-expanded="false">
 						<Fa icon={faBars} />
 						<span class="hidden sm:inline">Menu</span>
 					</button>
-					<ul
+					<ul style="list-style-type: none;"
 						class="absolute right-0 mt-2 w-48 bg-base-200 rounded-md shadow-lg py-1 z-10 hidden group-hover:block"
 						role="menu"
 						aria-orientation="vertical"
 						aria-labelledby="user-menu"
 					>
-					{#each menu_items as item}
-					<li>
-						<a
-							href={item.href}
-							data-sveltekit-reload={item.reload ? "" : "off"}
-							class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-							role="menuitem"
-						>
-							<Fa icon={item.icon} class="mr-2" />
-							<span>{item.label}</span> <!-- Wrapped text in a span for more control -->
-						</a>
-					</li>
-				{/each}
+						{#each menu_items as item}
+							<li>
+								<a
+									href={item.href}
+									data-sveltekit-reload={item.reload ? "" : "off"}
+									class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+									role="menuitem"
+								>
+									<Fa icon={item.icon} class="mr-2" />
+									<span>{item.label}</span>
+								</a>
+							</li>
+						{/each}
 					</ul>
 				</nav>
 			</div>
@@ -96,8 +93,10 @@
 </header>
 
 <style>
-	
-	nav:hover ul {
+	nav:hover ul, nav ul:hover {
+		display: block;
+	}
+	.group:hover .group-hover\:block {
 		display: block;
 	}
 </style>

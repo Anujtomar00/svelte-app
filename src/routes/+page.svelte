@@ -2,9 +2,8 @@
   import { session } from "$lib/stores/session";
   import Analytics from "./Analytics.svelte";
 </script>
-
 {#if $session?.user}
-  <div class="prose custom-prose-container p-4">
+  <div class="prose custom-prose-container">
     <div class="dashboard">
       <Analytics />
       <!-- Uncomment if you want to include these buttons

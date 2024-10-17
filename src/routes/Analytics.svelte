@@ -3,6 +3,7 @@
   import Doughnut from "./Doughnut.svelte";
   import Piechart from "./Piechart.svelte";
   import Batches from "../Data.json";
+  import Header from "./Header.svelte";
 
   let batchList: any[] = [];
   let data: any[] = [];
@@ -25,7 +26,7 @@
 
   onMount(getBatches);
 </script>
-
+<Header/>
 <div class="container">
   <h1 class="title">Analytical Overview</h1>
   
