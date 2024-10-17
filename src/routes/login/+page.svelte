@@ -40,7 +40,7 @@
 	}
 </style>
 
-<section class="max-w-sm mx-auto">
+<section style="padding: 3rem;" class="max-w-sm mx-auto">
 	<div class="prose">
 		<h1 style={` -webkit-text-fill-color: #0000;
 			background: -webkit-linear-gradient(270deg,#d6001c -54.17%,#6d297b);

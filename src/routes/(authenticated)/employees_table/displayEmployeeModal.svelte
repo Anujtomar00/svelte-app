@@ -65,14 +65,18 @@
 </script>
 
 {#if showModal}
-  <div class="modal-container">
+  <div class="modal-container flex flex-col">
     <div class="modal-background" on:click={handleClose} />
     <div class="modal-content">
       <div class="prose">
         <h2 class="text-4xl font-bold text-center mb-10">Employee Details</h2>
         <div class="tab">
-          <button class:selected={showSummary} on:click={handleSummary}>Details</button>
-          <button class:selected={showTimeline} on:click={handleTimeline}>Timeline</button>
+          <button class:selected={showSummary} on:click={handleSummary}
+            >Details</button
+          >
+          <button class:selected={showTimeline} on:click={handleTimeline}
+            >Timeline</button
+          >
         </div>
 
         {#if showSummary}
@@ -145,19 +149,27 @@
               <h2 class="section-title">Education Qualification</h2>
               <div class="info-item">
                 <p class="label">Degree:</p>
-                <p class="value">{viewData.employee_details.education.degree}</p>
+                <p class="value">
+                  {viewData.employee_details.education.degree}
+                </p>
               </div>
               <div class="info-item">
                 <p class="label">College Name:</p>
-                <p class="value">{viewData.employee_details.education.college_name}</p>
+                <p class="value">
+                  {viewData.employee_details.education.college_name}
+                </p>
               </div>
               <div class="info-item">
                 <p class="label">Date of Completion:</p>
-                <p class="value">{viewData.employee_details.education.completion_year}</p>
+                <p class="value">
+                  {viewData.employee_details.education.completion_year}
+                </p>
               </div>
               <div class="info-item">
                 <p class="label">Percentage:</p>
-                <p class="value">{viewData.employee_details.education.percentage}</p>
+                <p class="value">
+                  {viewData.employee_details.education.percentage}
+                </p>
               </div>
             </div>
           </div>
@@ -184,7 +196,8 @@
             </Timeline>
           </div>
         {/if}
-        <button class="dialog-close-button" on:click={handleClose}>Close</button>
+        <button class="dialog-close-button" on:click={handleClose}>Close</button
+        >
       </div>
     </div>
   </div>
@@ -201,9 +214,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
   }
 
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+  }
   .modal-background {
     position: absolute;
     top: 0;
@@ -211,21 +228,31 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 900;
   }
-
+  .bg-aliceblue {
+    background-color: aliceblue;
+    border-radius: 10px;
+    margin-top: 1rem;
+  }
   .modal-content {
+    overflow: auto;
     position: relative;
+    z-index: 1000;
     background-color: #fff;
-    padding: 10px; 
+    padding: 20px;
     border-radius: 4px;
+    text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
-    max-width: 90%; 
-    max-height: 90%;
-    overflow-y: auto; 
-    overflow-x: hidden; 
-    margin: 0 10px; 
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 25%;
+    height: 95%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
   .tab {
     display: flex;
     justify-content: center;
@@ -252,31 +279,20 @@
   button:hover {
     background-color: #e0e0e0;
   }
-
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr; 
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .bg-aliceblue {
-    background-color: aliceblue;
-    padding: 0.5rem; 
-    border-radius: 10px;
-  }
-
+ .prose{
+  width: 100%;
+ }
   .section-title {
-    font-size: 1.25rem; 
+    font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 0.25rem; 
+    margin-bottom: 0.25rem;
   }
 
   .info-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.25rem; 
-    font-size: 0.9rem; 
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
   }
 
   .dialog-close-button {
@@ -292,4 +308,41 @@
   .dialog-close-button:hover {
     background-color: #b40012;
   }
+  @media (max-width: 700px) {
+    .modal-content {
+      width: 90%;
+      left: 44%;
+    }
+    .prose{
+      width: 102%;
+    }
+  }
+  @media (max-width: 375px) {
+    .modal-content {
+      width: 90%;
+      left: 44%;
+    }
+    .prose{
+      width: 110%;
+    }
+  }
+  @media (max-width: 425) {
+    .modal-content {
+      width: 90%;
+      left: 44%;
+    }
+    .prose{
+      width: 103%;
+    }
+  }
+  @media (max-width: 768) {
+    .modal-content {
+      width: 90%;
+      left: 44%;
+    }
+    .prose{
+      width: 100%;
+    }
+  }
+
 </style>
