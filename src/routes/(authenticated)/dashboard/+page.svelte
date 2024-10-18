@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
+  import type { PageData } from "../../dashboard/$types";
   import SvelteTable from "../batches_table/svelteTable.svelte";
   import EmployeeTable from "../employees_table/employeeTable.svelte";
   import Header from "../../Header.svelte"

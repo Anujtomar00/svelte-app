@@ -1,4 +1,5 @@
-import { c as create_ssr_component, f as add_attribute, e as escape } from "./index.js";
+import { c as create_ssr_component, d as add_attribute, e as escape } from "./index.js";
+import "./fa.svelte_svelte_type_style_lang.js";
 const parseNumber = parseFloat;
 function joinCss(obj, separator = ";") {
   let texts;
@@ -79,7 +80,6 @@ function getTransform(scale, translateX, translateY, rotate, flip, translateTime
     " "
   );
 }
-const fa_svelte_svelte_type_style_lang = "";
 const css = {
   code: ".spin.svelte-1w3t65e{-webkit-animation:svelte-1w3t65e-spin 2s 0s infinite linear;animation:svelte-1w3t65e-spin 2s 0s infinite linear}.pulse.svelte-1w3t65e{-webkit-animation:svelte-1w3t65e-spin 1s infinite steps(8);animation:svelte-1w3t65e-spin 1s infinite steps(8)}@-webkit-keyframes svelte-1w3t65e-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes svelte-1w3t65e-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}",
   map: null

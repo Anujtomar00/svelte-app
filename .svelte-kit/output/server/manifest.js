@@ -3,7 +3,7 @@ export const manifest = {
 	assets: new Set(["edit.png","favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		entry: {"file":"_app/immutable/start-9e983a46.js","imports":["_app/immutable/start-9e983a46.js","_app/immutable/chunks/index-6c230a90.js","_app/immutable/chunks/singletons-08182c9b.js","_app/immutable/chunks/index-37129d4c.js","_app/immutable/chunks/control-a6874251.js"],"stylesheets":[]},
+		entry: {"file":"_app/immutable/start-bcf734f2.js","imports":["_app/immutable/start-bcf734f2.js","_app/immutable/chunks/index-8cdfdb7e.js","_app/immutable/chunks/singletons-56a8a284.js"],"stylesheets":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -12,8 +12,7 @@ export const manifest = {
 			() => import('./nodes/4.js'),
 			() => import('./nodes/5.js'),
 			() => import('./nodes/6.js'),
-			() => import('./nodes/7.js'),
-			() => import('./nodes/8.js')
+			() => import('./nodes/7.js')
 		],
 		routes: [
 			{
@@ -49,28 +48,12 @@ export const manifest = {
 				endpoint: null
 			},
 			{
-				id: "logout",
-				pattern: /^\/logout\/?$/,
-				names: [],
-				types: [],
-				page: { layouts: [0], errors: [1], leaf: 7 },
-				endpoint: null
-			},
-			{
 				id: "signup",
 				pattern: /^\/signup\/?$/,
 				names: [],
 				types: [],
-				page: { layouts: [0], errors: [1], leaf: 8 },
+				page: { layouts: [0], errors: [1], leaf: 7 },
 				endpoint: null
-			},
-			{
-				id: "api/me",
-				pattern: /^\/api\/me\/?$/,
-				names: [],
-				types: [],
-				page: null,
-				endpoint: () => import('./entries/endpoints/api/me/_server.ts.js')
 			}
 		],
 		matchers: async () => {

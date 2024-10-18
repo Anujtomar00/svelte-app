@@ -1,1 +1,0 @@
-import{r}from"./index-766d59b5.js";async function o(e){const{user:t}=await e.parent();if(t)throw r(303,"/");return{title:"Log In"}}const n=Object.freeze(Object.defineProperty({__proto__:null,load:o},Symbol.toStringTag,{value:"Module"}));export{n as _,o as l};

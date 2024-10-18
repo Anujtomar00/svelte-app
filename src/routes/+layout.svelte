@@ -1,11 +1,13 @@
 <script lang="ts">
   import "../app.postcss";
   import type { LayoutData } from "./$types";
+  import { onMount } from "svelte";
+  import { user } from "$lib/services/firebaseAuth";
+  import { goto } from "$app/navigation";
   import { page } from "$app/stores";
   import Footer from "./Footer.svelte";
-  // import Header from "./Header.svelte";
+  import Header from "./Header.svelte";
   import debug from "debug";
-  import { session } from "$lib/stores/session";
 
   const log = debug("app:routes:layout.svelte");
 
@@ -13,10 +15,17 @@
 
   $: title = $page.data?.title ? $page.data.title + " | " : "";
 
-  $: if (data?.user) $session.user = data.user;
-
   $: log("data:", data);
   $: log("$page.data:", $page.data);
+  onMount(() => {
+    const unsubscribe = user.subscribe(($user) => {
+      if ($user === null) {
+        goto("/");
+      }
+    });
+
+    return unsubscribe;
+  });
 </script>
 
 <svelte:head>

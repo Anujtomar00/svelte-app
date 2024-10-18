@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { session } from "$lib/stores/session";
   import Analytics from "./Analytics.svelte";
+  import { user } from "$lib/services/firebaseAuth";
 </script>
-{#if $session?.user}
+
+{#if $user}
   <div class="prose custom-prose-container">
     <div class="dashboard">
       <Analytics />

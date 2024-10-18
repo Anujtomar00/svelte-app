@@ -2,3 +2,6 @@
 /public/build/
 /package-lock.json/
 .DS_Store
+/build
+/android
+/.svelte-kit

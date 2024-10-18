@@ -7,18 +7,16 @@ export { matchers } from './client-matchers.js';
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
-	() => import('./nodes/7'),
-	() => import('./nodes/8')];
+	() => import('./nodes/7')];
 
-			export const server_loads = [0];
+			export const server_loads = [];
 
 			export const dictionary = {
 	"": [3],
 	"(authenticated)/dashboard": [4,[2]],
 	"(authenticated)/settings": [5,[2]],
-	"login": [~6],
-	"logout": [~7],
-	"signup": [~8]
+	"login": [6],
+	"signup": [7]
 };
 
 			export const hooks = {

@@ -7,6 +7,7 @@
   let successMessage = "";
   let errorMessage = "";
   const dispatch = createEventDispatcher();
+  const API_URL = `https://svelte-backend-production.up.railway.app`;
   export let getBatch: any;
   let form = {
     batch_name: "",
@@ -39,7 +40,7 @@
   async function handleSubmit(event: any) {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/batches", {
+      const response = await fetch(`${API_URL}/batches`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
