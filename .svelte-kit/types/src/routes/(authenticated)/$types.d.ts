@@ -9,6 +9,4 @@ type LayoutParams = RouteParams & {  }
 type LayoutParentData = EnsureParentData<import('../$types.js').LayoutData>;
 
 export type LayoutServerData = null;
-export type LayoutLoad<OutputData extends Partial<App.PageData> & Record<string, any> | void = Partial<App.PageData> & Record<string, any> | void> = Kit.Load<LayoutParams, LayoutServerData, LayoutParentData, OutputData>;
-export type LayoutLoadEvent = Parameters<LayoutLoad>[0];
-export type LayoutData = Omit<LayoutParentData, keyof Kit.AwaitedProperties<Awaited<ReturnType<typeof import('../../../../../src/routes/(authenticated)/+layout.js').load>>>> & Kit.AwaitedProperties<Awaited<ReturnType<typeof import('../../../../../src/routes/(authenticated)/+layout.js').load>>>;
+export type LayoutData = LayoutParentData;

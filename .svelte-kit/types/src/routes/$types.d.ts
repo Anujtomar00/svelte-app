@@ -7,12 +7,11 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureParentData<T> = T extends null | undefined ? {} : T;
 type PageParentData = EnsureParentData<LayoutData>;
 type LayoutParams = RouteParams & {  }
-type LayoutServerParentData = EnsureParentData<{}>;
 type LayoutParentData = EnsureParentData<{}>;
 
 export type PageServerData = null;
 export type PageData = PageParentData;
-export type LayoutServerLoad<OutputData extends OutputDataShape<LayoutServerParentData> = OutputDataShape<LayoutServerParentData>> = Kit.ServerLoad<LayoutParams, LayoutServerParentData, OutputData>;
-export type LayoutServerLoadEvent = Parameters<LayoutServerLoad>[0];
-export type LayoutServerData = Kit.AwaitedProperties<Awaited<ReturnType<typeof import('../../../../src/routes/+layout.server.js').load>>>;
-export type LayoutData = Omit<LayoutParentData, keyof LayoutServerData> & LayoutServerData;
+export type LayoutServerData = null;
+export type LayoutLoad<OutputData extends OutputDataShape<LayoutParentData> = OutputDataShape<LayoutParentData>> = Kit.Load<LayoutParams, LayoutServerData, LayoutParentData, OutputData>;
+export type LayoutLoadEvent = Parameters<LayoutLoad>[0];
+export type LayoutData = Omit<LayoutParentData, keyof LayoutParentData & LayoutServerData> & LayoutParentData & LayoutServerData;
