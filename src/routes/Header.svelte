@@ -34,7 +34,7 @@
 		};
 	});
 
-	$: menu_items = $session?.user
+	$: menu_items = user
 		? [
 				{
 					href: "/dashboard",
@@ -118,5 +118,4 @@
 			</div>
 		</div>
 	  </div>
-	</div>
 </header>
