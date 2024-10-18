@@ -8,6 +8,7 @@
   let showSuccess = false;
   let successMessage = "";
   let errorMessage = "";
+  const API_URL = `https://svelte-backend-production.up.railway.app`;
   let form = {
     employee_name: "",
     employee_id: 0,
@@ -65,7 +66,7 @@
     event.preventDefault();
     // dispatch('submit', form);
     try {
-      const response = await fetch("http://localhost:3000/employees", {
+      const response = await fetch(`${API_URL}/employees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +96,7 @@
   }
 
   const getBatches = async () => {
-    const response = await fetch("http://localhost:3000/batches");
+    const response = await fetch(`${API_URL}/batches`);
     const json = await response.json();
     data = json;
     newData = data.map((item: any) => {
@@ -178,223 +179,236 @@
       on:click={handleClose}
       on:keydown={handleKeyDown}
     />
-   
-    
+
     <div class="modal-content">
       <div class="prose" style="display: contents;">
         <h3 class="text-4xl font-bold text-center mb-4">Add Employee</h3>
         <form on:submit={handleSubmit}>
-        <div class="grid-container">
-          <div class="bg-aliceblue p-4 shadow-md">
+          <div class="grid-container">
+            <div class="bg-aliceblue p-4 shadow-md">
+              <h2 class="">Basic Details</h2>
 
-        <h2 class="">Basic Details</h2>
+              <input
+                autocorrect="off"
+                type="text"
+                id="employee_name"
+                name="name"
+                placeholder="Employee name..."
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                required
+                on:input={handleInput}
+              />
 
-          <input
-            autocorrect="off"
-            type="text"
-            id="employee_name"
-            name="name"
-            placeholder="Employee name..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}
-          />
+              <input
+                autocorrect="off"
+                type="number"
+                id="employee_id"
+                name="id"
+                placeholder="Employee Id..."
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                required
+                on:input={handleInput}
+              />
 
-          <input
-            autocorrect="off"
-            type="number"
-            id="employee_id"
-            name="id"
-            placeholder="Employee Id..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}
-          />
+              <select
+                id="employee_batch"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
+                on:input={handleInput}
+                style="margin-top: 2rem;"
+              >
+                <option selected>Select a batch</option>
+                {#each newData as item}
+                  <option value={item.batch_name}>{item.batch_name}</option>
+                {/each}
+              </select>
 
-          <select
-            id="employee_batch"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
-            on:input={handleInput}
-            style="margin-top: 2rem;"
-          >
-            <option selected>Select a batch</option>
-            {#each newData as item}
-              <option value={item.batch_name}>{item.batch_name}</option>
-            {/each}
-          </select>
+              <input
+                autocorrect="off"
+                type="email"
+                id="employee_email"
+                name="email"
+                placeholder="Employee email..."
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                required
+                on:input={handleInput}
+              />
 
-          <input
-            autocorrect="off"
-            type="email"
-            id="employee_email"
-            name="email"
-            placeholder="Employee email..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}
-          />
+              <select
+                id="employee_status"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
+                on:input={handleInput}
+                style="margin-top: 2rem;"
+              >
+                <option selected>Select status</option>
+                <option value="Completed">Completed</option>
+                <option value="Left">Left</option>
+                <option value="On Hold">On Hold</option>
+                <option value="In Progress">In Progress</option>
+              </select>
 
-          <select
-            id="employee_status"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
-            on:input={handleInput}
-            style="margin-top: 2rem;"
-          >
-            <option selected>Select status</option>
-            <option value="Completed">Completed</option>
-            <option value="Left">Left</option>
-            <option value="On Hold">On Hold</option>
-            <option value="In Progress">In Progress</option>
-          </select>
+              <select
+                id="practice"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
+                on:input={handleInput}
+                style="margin-top: 2rem;"
+              >
+                <option selected>Select practice</option>
+                <option value="KUP">KUP</option>
+                <option value="KIP">KIP</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Devops">Devops</option>
+                <option value="Java">Java</option>
+                <option value="Test Automation">Test Automation</option>
+                <option value="Scala">Scala</option>
+              </select>
+            </div>
+            <div class="p-4 bg-aliceblue shadow-md">
+              <div class="personal-info">
+                <h2 class="section-title">Personal Information</h2>
 
-          <select
-            id="practice"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
-            on:input={handleInput}
-            style="margin-top: 2rem;"
-          >
-            <option selected>Select practice</option>
-            <option value="KUP">KUP</option>
-            <option value="KIP">KIP</option>
-            <option value="Frontend">Frontend</option>
-            <option value="Devops">Devops</option>
-            <option value="Java">Java</option>
-            <option value="Test Automation">Test Automation</option>
-            <option value="Scala">Scala</option>
+                <input
+                  autocorrect="off"
+                  type="email"
+                  id="personal_email"
+                  name="email"
+                  placeholder="Personal Email..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-          </select>
-        </div>
-          <div class="p-4 bg-aliceblue shadow-md">
+                <input
+                  autocorrect="off"
+                  type="number"
+                  id="age"
+                  name="number"
+                  placeholder="Age..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-          <div class="personal-info">
-            <h2 class="section-title">Personal Information</h2>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="dob"
+                  name="text"
+                  placeholder="Date of Birth..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-              <input 
-              autocorrect="off"
-              type="email"
-              id="personal_email"
-              name="email"
-              placeholder="Personal Email..."
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-              required
-              on:input={handleInput}/>
+                <select
+                  id="gender"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
+                  on:input={handleInput}
+                  style="margin-top: 2rem;"
+                >
+                  <option selected>Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
 
-              <input 
-              autocorrect="off"
-              type="number"
-              id="age"
-              name="number"
-              placeholder="Age..."
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-              required
-              on:input={handleInput}/>
+                <input
+                  autocorrect="off"
+                  type="number"
+                  id="phone_number"
+                  name="number"
+                  placeholder="Phone Number..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-            <input 
-            autocorrect="off"
-            type="text"
-            id="dob"
-            name="text"
-            placeholder="Date of Birth..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}/>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="github_id"
+                  name="text"
+                  placeholder="GitHub ID..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-            <select
-            id="gender"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red"
-            on:input={handleInput}
-            style="margin-top: 2rem;"
-          >
-            <option selected>Select gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="address"
+                  name="text"
+                  placeholder="Address..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
+              </div>
+            </div>
 
-            <input 
-            autocorrect="off"
-            type="number"
-            id="phone_number"
-            name="number"
-            placeholder="Phone Number..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}/>
+            <div class="p-4 bg-aliceblue shadow-md">
+              <div class="education-info">
+                <h2 class="section-title">Education Qualification</h2>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="degree"
+                  name="text"
+                  placeholder="Degree..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-            <input 
-            autocorrect="off"
-            type="text"
-            id="github_id"
-            name="text"
-            placeholder="GitHub ID..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}/>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="college_name"
+                  name="text"
+                  placeholder="College Name..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-            <input 
-            autocorrect="off"
-            type="text"
-            id="address"
-            name="text"
-            placeholder="Address..."
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-            required
-            on:input={handleInput}/>
-          </div>
-        </div>
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="completion_year"
+                  name="text"
+                  placeholder="Date of Completion..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
 
-          <div class="p-4 bg-aliceblue shadow-md">
-
-        <div class="education-info">
-          <h2 class="section-title">Education Qualification</h2>
-          <input 
-          autocorrect="off"
-          type="text"
-          id="degree"
-          name="text"
-          placeholder="Degree..."
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-          required
-          on:input={handleInput}/>
-
-          <input 
-          autocorrect="off"
-          type="text"
-          id="college_name"
-          name="text"
-          placeholder="College Name..."
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-          required
-          on:input={handleInput}/>
-
-          <input 
-          autocorrect="off"
-          type="text"
-          id="completion_year"
-          name="text"
-          placeholder="Date of Completion..."
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-          required
-          on:input={handleInput}/>
-
-          <input 
-          autocorrect="off"
-          type="text"
-          id="percentage"
-          name="percentage"
-          placeholder="Percentage..."
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
-          required
-          on:input={handleInput}/>
-        </div>
-      </div>
-          <p class="flex items-center gap-4 mt-12">
-            <button class="btn btn-primary" style={`background-color: var(--app-primary-color, #d60016);
+                <input
+                  autocorrect="off"
+                  type="text"
+                  id="percentage"
+                  name="percentage"
+                  placeholder="Percentage..."
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red focus:border-red block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red dark:focus:border-red w-full"
+                  required
+                  on:input={handleInput}
+                />
+              </div>
+            </div>
+            <p class="flex items-center gap-4 mt-12">
+              <button
+                class="btn btn-primary"
+                style={`background-color: var(--app-primary-color, #d60016);
     border: none;
-    color: white;`} type="submit">Submit</button>
-            <button class="btn" style={`background-color: #63666B;`} on:click={handleClose}>Cancel</button>
-          </p>
-        </div>
-      </form>
+    color: white;`}
+                type="submit">Submit</button
+              >
+              <button
+                class="btn"
+                style={`background-color: #63666B;`}
+                on:click={handleClose}>Cancel</button
+              >
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -422,12 +436,12 @@
 {/if}
 
 <style>
-   .grid-container {
+  .grid-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 3rem;
   }
-  
+
   .modal-container {
     position: fixed;
     z-index: 1000;
@@ -465,11 +479,11 @@
     height: 95%;
     width: 50%;
   }
-@media (max-width: 700px) {
+  @media (max-width: 700px) {
     .modal-content {
-    width: 90%;
+      width: 90%;
     }
-}
+  }
 
   form {
     max-width: 600px;

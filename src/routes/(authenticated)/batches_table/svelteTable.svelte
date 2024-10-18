@@ -15,6 +15,7 @@
   let showDialog = false;
   let batchFilter ="";
   let isLoading = true;
+  const API_URL = `https://svelte-backend-production.up.railway.app`;
 
   function handleDialogSubmit() {
     deleteBatch(deleteId);
@@ -46,9 +47,9 @@
   };
   const getBatches = async () => {
     isLoading=true;
-    // const response = await fetch("http://localhost:3000/batches");
-    // const json = await response.json();
-    data = Batches.batches;
+    const response = await fetch(`${API_URL}/batches`);
+    const json = await response.json();
+    data = json || [];
     batchData();
     isLoading=false;
   };
@@ -85,7 +86,7 @@
   const deleteBatch = async (ids: any) => {
     // dispatch('submit', form);
     try {
-      const response = await fetch(`http://localhost:3000/batches/delete`, {
+      const response = await fetch(`${API_URL}/batches/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

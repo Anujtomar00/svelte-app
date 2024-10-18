@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { session } from "$lib/stores/session";
+	import { user } from "$lib/services/firebaseAuth"; // Import user store
 	import {
-		faBars,
-		faChartLine,
-		faCog,
-		faHeart,
-		faRocket,
-		faSignIn,
-		faSignOut,
-		faHome
+	  faBars,
+	  faChartLine,
+	  faCog,
+	  faSignIn,
+	  faSignOut,
+	  faHome,
 	} from "@fortawesome/free-solid-svg-icons";
 	import Fa from "svelte-fa";
 	import { onMount } from 'svelte';
@@ -36,7 +34,7 @@
 		};
 	});
 
-	$: menu_items = $session?.user
+	$: menu_items = user
 		? [
 				{
 					href: "/dashboard",
@@ -119,5 +117,5 @@
 				</nav>
 			</div>
 		</div>
-	</div>
+	  </div>
 </header>

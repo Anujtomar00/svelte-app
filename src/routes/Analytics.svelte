@@ -10,11 +10,25 @@
   let isLoading = true;
   let colors: any[] = ["#205c65", "#545421", "#81417d", "#b2040e", "#073e53"];
 
+  const API_URL = "https://svelte-backend-production.up.railway.app";
+
   const getBatches = async () => {
     isLoading = true;
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    batchList = Batches.batches;
-    isLoading = false;
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch(`${API_URL}/batches`);
+      if (response.ok) {
+        const data = await response.json();
+        batchList = data;
+      } else {
+        const text = await response.text();
+        console.log(text);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    } finally {
+      isLoading = false;
+    }
   };
 
   $: if (batchList.length > 0) {
@@ -26,13 +40,14 @@
 
   onMount(getBatches);
 </script>
-<Header/>
+
+<Header />
 <div class="container">
   <h1 class="title">Analytical Overview</h1>
-  
+
   {#if isLoading}
     <div class="loading">
-      <div class="loading-spinner"></div>
+      <p class="loading-spinner" />
       <p>Loading...</p>
     </div>
   {:else}
@@ -45,10 +60,10 @@
         </div>
       {/each}
     </div>
-    
+
     <div class="chart-container">
       <div class="chart">
-        <h2>Pie Chart</h2>
+        <h2>Bar Chart</h2>
         <div class="chart-wrapper">
           <Piechart data1={data} />
         </div>
@@ -77,7 +92,7 @@
   }
 
   .container {
-    max-width: 1200px; 
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     display: flex;
@@ -110,8 +125,12 @@
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .card-container {
